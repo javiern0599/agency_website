@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         "GDPR Compliance",
     ],
     openGraph: {
-        title: "Security & Compliance | PraxisFlow Automations",
+        title: "Security & Compliance | PraxisFlow",
         description: "Your legal workflows and sensitive data are protected through dedicated infrastructure and layered safeguards.",
         url: "https://www.praxisflow.com/security",
         type: "website",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Security & Compliance | PraxisFlow Automations",
+        title: "Security & Compliance | PraxisFlow",
         description: "Your legal workflows and sensitive data are protected through dedicated infrastructure and layered safeguards.",
         images: ["/og-image.png"],
     },

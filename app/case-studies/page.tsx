@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         "Legal Tech Results",
     ],
     openGraph: {
-        title: "Case Studies | PraxisFlow Automations",
+        title: "Case Studies | PraxisFlow",
         description: "See how we've helped boutique law firms save thousands of hours and increase revenue through custom automation.",
         url: "https://www.praxisflow.com/case-studies",
         type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Case Studies | PraxisFlow Automations",
+        title: "Case Studies | PraxisFlow",
         description: "See how we've helped boutique law firms save thousands of hours and increase revenue through custom automation.",
         images: ["/og-image.png"],
     },

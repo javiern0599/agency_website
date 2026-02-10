@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         "Law Firm Software Integration",
     ],
     openGraph: {
-        title: "Integrations | PraxisFlow Automations",
+        title: "Integrations | PraxisFlow",
         description: "Connect any tool and automate everything. Bridge the gap between your Practice Management System and 1000+ productivity tools with custom n8n workflows.",
         url: "https://www.praxisflow.com/integrations",
         type: "website",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Integrations | PraxisFlow Automations",
+        title: "Integrations | PraxisFlow",
         description: "Connect any tool and automate everything. Bridge the gap between your Practice Management System and 1000+ productivity tools.",
         images: ["/og-image.png"],
     },

@@ -2,6 +2,17 @@ import React from "react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Terms of Use",
+    description: "Terms and conditions for using PraxisFlow services.",
+    openGraph: {
+        title: "Terms of Use | PraxisFlow",
+        description: "Terms and conditions for using PraxisFlow services.",
+        url: "https://www.praxisflow.com/terms-of-use",
+    },
+};
 
 export default function TermsOfUsePage() {
     const lastUpdated = "November 22, 2025";

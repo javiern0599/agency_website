@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.praxisflow.com"),
     title: {
-        default: "PraxisFlow Automations | Legal Automation Agency",
-        template: "%s | PraxisFlow Automations",
+        default: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
+        template: "%s | PraxisFlow",
     },
     description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
     keywords: [
@@ -23,26 +23,26 @@ export const metadata: Metadata = {
         "PraxisFlow",
     ],
     authors: [{ name: "PraxisFlow Team" }],
-    creator: "PraxisFlow Automations",
+    creator: "PraxisFlow",
     openGraph: {
         type: "website",
         locale: "en_US",
         url: "https://praxisflow.com",
-        title: "PraxisFlow Automations | Legal Automation Agency",
+        title: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
         description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
-        siteName: "PraxisFlow Automations",
+        siteName: "PraxisFlow",
         images: [
             {
                 url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "PraxisFlow Automations",
+                alt: "PraxisFlow",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "PraxisFlow Automations | Legal Automation Agency",
+        title: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
         description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
         images: ["/og-image.png"],
         creator: "@praxisflow",

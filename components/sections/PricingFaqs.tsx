@@ -11,17 +11,7 @@ export function FAQs() {
         {
             question: "What is included in the 'Ongoing Partnership' fee?",
             answer:
-                "If you prefer, we offer a monthly ongoing partnership, which includes dedicated account management, priority support (Slack, email, phone), quarterly optimization reviews, workflow adjustments and enhancements, infrastructure monitoring, and scaling support. You're not paying for a platform—you're investing in a true partner committed to your long-term success.",
-        },
-        {
-            question: "Do you offer performance-based or ROI guarantees?",
-            answer:
-                "We're confident in our work and willing to discuss ROI projections during discovery. While we don't offer percentage guarantees (since results depend on implementation, firm adoption, and market factors), we commit to transparent measurement and optimization. We track KPIs like time saved, error reduction, and revenue impact quarterly and adjust our approach if targets aren't being met.",
-        },
-        {
-            question: "Is there a minimum contract length?",
-            answer:
-                "The implementation phase is typically a fixed project engagement. The ongoing partnership is month-to-month with a 30-day notice for changes, giving you flexibility while ensuring we can plan and optimize effectively. For annual commitments, we offer a 10% discount on the monthly partnership fee.",
+                "Our ongoing partnership includes dedicated account management, priority support (Slack, email, phone), quarterly optimization reviews, workflow adjustments and enhancements, infrastructure monitoring, and scaling support.",
         },
         {
             question: "Why don't you have fixed pricing?",
@@ -29,11 +19,35 @@ export function FAQs() {
                 "Every law firm is unique with different workflows, integrations, and scale requirements. Fixed pricing would either leave money on the table for simple projects or underprice complex implementations. We conduct a thorough discovery process to understand your specific needs, calculate ROI, and provide a transparent investment that reflects the true value delivered.",
         },
         {
+            question: "Is infrastructure management optional?",
+            answer:
+                "No. Your n8n instance runs on a dedicated server that operates 24/7. This requires continuous security monitoring, patch management, automated backup verification, and performance alerting. We cannot offer 'infrastructure only' pricing as the management overhead exists regardless of usage intensity.",
+        },
+        {
+            question: "Am I locked in? What happens if I want to cancel?",
+            answer:
+                "Absolutely not. You own your n8n instance and data. If you decide to transition away, we provide full support to migrate your infrastructure to your preferred provider with minimal downtime and a standard 30-day notice. We believe in keeping clients through results, not contracts.",
+        },
+        {
+            question: "Is there a minimum contract length?",
+            answer:
+                "The implementation phase is typically a fixed project engagement. The ongoing partnership is month-to-month with a 30-day notice for changes, giving you flexibility while ensuring we can plan and optimize effectively. For annual commitments, we offer a 10% discount on the monthly partnership fee.",
+        },
+        {
+            question: "Is the monthly fee for n8n software licensing?",
+            answer:
+                "No. n8n is free, open-source software (Apache 2.0 license). Your monthly fee covers server infrastructure (Hetzner VPS, Backblaze backups), security hardening and monitoring (24/7 uptime tracking), automated backups, SSL certificates, software updates, and priority support. You own your n8n instance; we manage the infrastructure it runs on.",
+        },
+        {
+            question: "Do you offer performance-based or ROI guarantees?",
+            answer:
+                "We're confident in our work and willing to discuss ROI projections during discovery. While we don't offer percentage guarantees (since results depend on implementation, firm adoption, and market factors), we commit to transparent measurement and optimization. We track KPIs like time saved, error reduction, and revenue impact quarterly and adjust our approach if targets aren't being met.",
+        },
+        {
             question: "What happens if we need additional integrations or changes mid-project?",
             answer:
                 "Changes are handled through change requests during implementation, or folded into the ongoing partnership phase. For minor adjustments, they're typically included in your monthly fee. Significant new integrations are scoped separately and can be added to the partnership, ensuring predictability and flexibility.",
         },
-
         {
             question: "Why do you use n8n instead of platforms like Zapier or Make?",
             answer:

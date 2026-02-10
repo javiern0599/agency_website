@@ -14,6 +14,16 @@ export function FAQsHomepage() {
                 "Implementation timelines vary based on complexity, but most projects take 4-12 weeks from discovery to full deployment. Simple integrations might take 2-3 weeks, while comprehensive firm-wide automation could take 3 months. We provide a detailed project timeline during discovery and keep you updated throughout each phase.",
         },
         {
+            question: "Who owns the data and workflows?",
+            answer:
+                "You do. 100%. Unlike closed platforms, we build on your own private infrastructure. You own the workflows, the data, and the n8n instance. We simply manage and maintain it for you.",
+        },
+        {
+            question: "Do I need to pay for n8n?",
+            answer:
+                "n8n is free and open-source software. While n8n offers a paid cloud version, we deploy the self-hosted edition on your own private infrastructure. This ensures you have no limits on workflow complexity, complete data isolation, and full ownership—qualities that often cost significantly more or aren't possible with standard cloud plans. Your fee covers this dedicated infrastructure and our expert management, not a software license.",
+        },
+        {
             question: "Do we need to switch from our current legal software?",
             answer:
                 "No. We integrate with your existing tools—Clio, MyCase, LawLion, and 1,000+ other applications. Our workflows layer on top of your current infrastructure, so there's minimal disruption. In fact, we often reduce friction by automating the manual data transfers between your existing systems.",
@@ -22,11 +32,6 @@ export function FAQsHomepage() {
             question: "How do you handle sensitive client data and security?",
             answer:
                 "Security is foundational. We build your automations using n8n, which allows us to provide a service unrestricted by the heavy over-usage charges typically imposed by platforms like Zapier or Make. Instead of your data sitting on a third-party cloud, your n8n instance runs within a dedicated, private environment. This ensures your sensitive business information stays within your control. Never shared, never co-mingled, and with no data passing through our servers. We implement end-to-end encryption for sensitive data, maintain detailed audit logs for compliance, and follow legal industry standards. All API credentials are stored securely in encrypted vaults, and we conduct quarterly security reviews.",
-        },
-        {
-            question: "What if we need to change or scale workflows later?",
-            answer:
-                "Our monthly partnership covers continuous monitoring, maintenance, and minor adjustments to ensure your existing workflows run smoothly. While we provide strategic guidance during our quarterly reviews, major overhauls or entirely new automation projects are scoped separately. This ensures your core systems stay reliable while providing a clear path for significant scaling and new development.",
         },
     ]
 

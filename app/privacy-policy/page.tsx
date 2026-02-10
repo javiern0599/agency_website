@@ -2,6 +2,17 @@ import React from "react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy",
+    description: "Our commitment to protecting your data and privacy.",
+    openGraph: {
+        title: "Privacy Policy | PraxisFlow",
+        description: "Our commitment to protecting your data and privacy.",
+        url: "https://www.praxisflow.com/privacy-policy",
+    },
+};
 
 export default function PrivacyPolicyPage() {
     const lastUpdated = "November 22, 2025";

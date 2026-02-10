@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         "Law Firm Automation Help",
     ],
     openGraph: {
-        title: "Contact Us | PraxisFlow Automations",
+        title: "Contact Us | PraxisFlow",
         description: "Start your firm's transformation. Schedule a free workflow audit to identify your biggest automation opportunities.",
         url: "https://www.praxisflow.com/contact",
         type: "website",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Contact Us | PraxisFlow Automations",
+        title: "Contact Us | PraxisFlow",
         description: "Start your firm's transformation. Schedule a free workflow audit to identify your biggest automation opportunities.",
         images: ["/og-image.png"],
     },

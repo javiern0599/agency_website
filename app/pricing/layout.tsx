@@ -11,7 +11,7 @@ export const metadata: Metadata = {
         "PraxisFlow Pricing",
     ],
     openGraph: {
-        title: "Pricing | PraxisFlow Automations",
+        title: "Pricing | PraxisFlow",
         description: "Transparent, value-based investment for legal automation. No hourly billing, no surprises. Just clear ROI and a partnership built on trust.",
         url: "https://www.praxisflow.com/pricing",
         type: "website",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Pricing | PraxisFlow Automations",
+        title: "Pricing | PraxisFlow",
         description: "Transparent, value-based investment for legal automation. No hourly billing, no surprises.",
         images: ["/og-image.png"],
     },
