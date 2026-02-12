@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.praxisflow.com"),
     title: {
-        default: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
+        default: "PraxisFlow | Secure Legal Automation & Private Infrastructure",
         template: "%s | PraxisFlow",
     },
     description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
         url: "https://praxisflow.com",
-        title: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
+        title: "PraxisFlow | Secure Legal Automation & Private Infrastructure ",
         description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
         siteName: "PraxisFlow",
         images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "PraxisFlow | Private Automation Infrastructure for Modern Law Firms",
+        title: "PraxisFlow | Secure Legal Automation & Private Infrastructure ",
         description: "We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
         images: ["/og-image.webp"],
         creator: "@praxisflow",
