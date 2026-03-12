@@ -303,7 +303,9 @@ function IntegrationsContent() {
 							most impact on your firm.
 						</p>
 						<Link
-							href="/contact"
+							href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
+							target="_blank"
+							rel="noopener noreferrer"
 							className="w-full sm:w-auto inline-block"
 						>
 							<ShimmerButton

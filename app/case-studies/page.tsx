@@ -149,7 +149,9 @@ export default function CaseStudiesPage() {
 						<FadeIn delay={0.2}>
 							<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
 								<Link
-									href="/contact"
+									href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
+									target="_blank"
+									rel="noopener noreferrer"
 									className="w-full sm:w-auto"
 								>
 									<ShimmerButton
