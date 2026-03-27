@@ -78,7 +78,7 @@ export async function POST(req: Request) {
 
         const { data, error } = await resend.emails.send({
             from: "PraxisFlow Leads <onboarding@mail.praxisflow.com>", // Update this to your verified domain when ready
-            to: ["javier@praxisflow.com"],
+            to: ["contact@praxisflow.com"],
             subject: n8nSuccess 
                 ? `[n8n Logged] New Lead: ${firm}` 
                 : `[URGENT - n8n Failed] New Lead: ${firm}`,
