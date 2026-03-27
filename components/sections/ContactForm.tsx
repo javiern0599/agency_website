@@ -233,7 +233,7 @@ export function ContactForm() {
 					htmlFor="message"
 					className="text-sm font-medium text-foreground"
 				>
-					How can we help?
+					What is the biggest bottleneck in your current workflow?
 				</label>
 				<textarea
 					id="message"
