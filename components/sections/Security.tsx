@@ -79,14 +79,19 @@ const features = [
 
 export default function Security() {
   return (
-    <section id="security" className="py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <section id="security" className="py-32 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white overflow-hidden relative">
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute top-1/4 left-1/6 w-[420px] h-[420px] bg-teal-500/20 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-[420px] h-[420px] bg-blue-500/12 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         <FadeIn margin="-200px">
           <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-4">
+            <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-4 text-white">
               Enterprise-Grade Security
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-slate-300 max-w-2xl mx-auto">
               Your firm's data protection is our top priority. We use industry-leading security measures to keep your information safe, private, and available.
             </p>
           </div>
@@ -103,7 +108,7 @@ export default function Security() {
                 href="/contact"
                 cta="Learn more"
                 background={<div className="absolute inset-0" />}
-                className="md:col-span-1 rounded-2xl hover:border-teal-500/40"
+                className="md:col-span-1 rounded-2xl hover:border-teal-400/30"
                 delay={0.05 + idx * 0.03}
               />
             ))}
