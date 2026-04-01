@@ -129,7 +129,11 @@ export function Pricing() {
 							Our comprehensive engagement model ensures you get
 							value from day one and sustainable growth forever.
 						</p>
-						<Link href="/contact" className="inline-block">
+						<Link 
+                            href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
+							target="_blank"
+							rel="noopener noreferrer"
+                            className="inline-block">
 							<div className="group relative overflow-hidden rounded-2xl bg-accent px-8 py-4 transition-all hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20">
 								<AnimatedShinyText className="inline-flex items-center justify-center gap-2 text-lg font-medium text-primary-foreground transition ease-out hover:text-primary-foreground/90 hover:duration-300 bg-gradient-to-r from-transparent via-white/80 via-50% to-transparent dark:via-white/80">
 									<span>Schedule a Free Discovery Call</span>
