@@ -5,6 +5,7 @@ import Process from "../components/sections/Process";
 import { PathwaysToEngagement } from "../components/sections/PathwaysToEngagement";
 // import Testimonials from "../components/sections/Testimonials";
 import { FAQsHomepage } from "../components/sections/HomeFaqs";
+import Security from "../components/sections/Security";
 import CTA from "../components/sections/CTA";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
 			<Process />
 			<PathwaysToEngagement />
 			{/* <Testimonials /> */}
+			<Security />
 			<FAQsHomepage />
 			<CTA />
 		</div>
