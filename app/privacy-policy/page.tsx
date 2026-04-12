@@ -167,6 +167,14 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 								</ul>
+								<p className="text-muted-foreground leading-relaxed mt-6">
+									We will only use mobile phone numbers and
+									SMS marketing consent for the purposes for
+									which they were provided. We do not share
+									phone numbers or opt-in consent with third
+									parties or affiliates for marketing
+									purposes.
+								</p>
 							</section>
 
 							<section className="mb-12">
