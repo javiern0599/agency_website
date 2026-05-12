@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sendGAEvent } from '@next/third-parties/google'
 
 export function ContactForm() {
 	const [status, setStatus] = useState<
@@ -61,6 +62,9 @@ export function ContactForm() {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
+		// THE HONEYPOT CHECK
+		if (formData.fax) return; // If a bot filled this, just stop silently.
+
 		// Validate all fields before submission
 		const newErrors: Record<string, string> = {};
 		let hasErrors = false;
@@ -76,6 +80,8 @@ export function ContactForm() {
 		});
 
 		if (hasErrors) {
+			// Track if they tried to submit but had errors (Optional but helpful for UI/UX)
+			sendGAEvent('event', 'form_error', { category: 'contact', label: 'validation_failed' });
 			setErrors(newErrors);
 			setTouched({ name: true, email: true, firm: true, message: true });
 			return;
@@ -83,6 +89,12 @@ export function ContactForm() {
 
 		setStatus("loading");
 		setErrorMessage("");
+
+		// Track the actual submission attempt
+		sendGAEvent('event', 'contact_form_submit', {
+			category: 'lead_gen',
+			label: formData.firm
+		});
 
 		try {
 			const response = await fetch("/api/contact", {
@@ -97,6 +109,13 @@ export function ContactForm() {
 				throw new Error(data.error || "Failed to send");
 			}
 
+			// Track SUCCESS (The "Conversion")
+			// 'generate_lead' is a standard Google event name marketing person will recognize
+			sendGAEvent('event', 'generate_lead', {
+				currency: 'USD',
+				value: 0 // We can set a lead value if we want
+			});
+
 			setStatus("success");
 			setFormData({
 				name: "",
@@ -109,6 +128,7 @@ export function ContactForm() {
 			setErrors({});
 		} catch (error: any) {
 			console.error("Form error:", error);
+			sendGAEvent('event', 'form_submission_failed', { message: error.message });
 			setErrorMessage(error.message);
 			setStatus("error");
 		}

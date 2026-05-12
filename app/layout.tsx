@@ -7,6 +7,7 @@ import Footer from "../components/ui/Footer";
 import JsonLd from "../components/seo/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from '@next/third-parties/google'
 // import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -128,6 +129,7 @@ export default function RootLayout({
 						})(document,"script");
 					`}
 				</Script>
+				<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
 			</body>
 		</html>
 	);
