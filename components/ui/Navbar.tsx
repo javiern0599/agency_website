@@ -30,6 +30,12 @@ export default function Navbar() {
 						About
 					</Link>
 					<Link
+						href="/blog"
+						className="hover:text-foreground transition-colors"
+					>
+						Blog
+					</Link>
+					<Link
 						href="/case-studies"
 						className="hover:text-foreground transition-colors"
 					>
