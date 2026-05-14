@@ -4,8 +4,18 @@ import { ShimmerButton } from "../ui/shimmer-button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FadeIn } from "../ui/fade-in";
+import { sendGAEvent } from '@next/third-parties/google'
 
 export default function CTA() {
+
+	const handleBookingClick = () => {
+		sendGAEvent('event', 'cta_booking_click', {
+			event_category: 'conversion',
+			// This tell the marketing person exactly which page they were on
+			location: typeof window !== 'undefined' ? window.location.pathname : 'unknown'
+		});
+	};
+
 	return (
 		<section className="py-24 px-6 bg-background">
 			<div className="max-w-5xl mx-auto bg-primary rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
@@ -43,6 +53,7 @@ export default function CTA() {
 								target="_blank"
 								rel="noopener noreferrer"
 								className="w-full sm:w-auto"
+								onClick={handleBookingClick}
 							>
 								<ShimmerButton
 									className="w-full px-8 py-3.5 rounded-2xl font-medium"

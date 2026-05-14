@@ -1,8 +1,10 @@
+"use client"
 import Link from "next/link";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import { ShimmerButton } from "../ui/shimmer-button";
 import { Ripple } from "../ui/ripple";
 import { FadeIn } from "../ui/fade-in";
+import { sendGAEvent } from '@next/third-parties/google'
 
 export default function Hero() {
 	return (
@@ -44,6 +46,10 @@ export default function Hero() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="w-full sm:w-auto"
+							onClick={() => sendGAEvent('event', 'hero_cta_click', {
+								event_category: 'engagement',
+								event_label: 'Let\'s Talk Growth'
+							})}
 						>
 							<ShimmerButton
 								className="w-full px-8 py-3.5 rounded-2xl font-medium"
