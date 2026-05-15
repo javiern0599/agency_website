@@ -91,6 +91,13 @@ export default function Navbar() {
 							About
 						</Link>
 						<Link
+							href="/blog"
+							className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Blog
+						</Link>
+						<Link
 							href="/case-studies"
 							className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
 							onClick={() => setIsMenuOpen(false)}
