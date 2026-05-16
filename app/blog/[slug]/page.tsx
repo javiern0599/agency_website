@@ -6,6 +6,7 @@ import { DotPattern } from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { draftMode } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
@@ -84,15 +85,25 @@ export default async function SinglePostPage({
 }: {
 	params: Promise<{ slug: string }>; // 1. Updated type to Promise
 }) {
-	const { slug } = await params; // 2. Await and unwrap the slug here
+	const { slug } = await params;
+	const isDraft = (await draftMode()).isEnabled; // Detects if preview is running
+
 	let post = null;
 
 	try {
-		// Fetch the actual post content using the unwrapped slug
-		const postsData = await fetchAPI("/posts", {
-			filters: { slug: { $eq: slug } }, // 3. Changed params.slug to slug
-			populate: ["coverImage", "author"],
-		});
+		const postsData = await fetchAPI(
+			"/posts",
+			{
+				filters: { slug: { $eq: slug } },
+				populate: ["coverImage", "author"],
+				// If draft mode is active, fetch status='draft' from Strapi 5
+				status: isDraft ? "draft" : "published",
+			},
+			{
+				// Bypass all server data caching if previewing an unreleased change
+				cache: isDraft ? "no-store" : undefined,
+			},
+		);
 
 		post = postsData.data[0];
 	} catch (error) {
