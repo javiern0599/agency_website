@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+// 1. Add 'use' to your React imports
+import { use, useRef } from "react";
 import Link from "next/link";
 import {
 	ArrowLeft,
@@ -34,9 +35,14 @@ const getIndustryIcon = (industry: string) => {
 export default function CaseStudyDetail({
 	params,
 }: {
-	params: { id: string };
+	params: Promise<{ id: string }>; // 2. Update type definition to a Promise
 }) {
-	const caseStudy = successCases.find((study) => study.id === params.id);
+	// 3. Unwrap the params using the React use() hook
+	const { id } = use(params);
+
+	// 4. Match against the unwrapped 'id' string variable
+	const caseStudy = successCases.find((study) => study.id === id);
+
 	const containerRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
