@@ -4,6 +4,26 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import next from "next";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Blog", // This plugs into the root layout's "%s | PraxisFlow" template automatically!
+	description:
+		"Insights, updates, and thoughts on legal automation, private infrastructure, and operational efficiency.",
+	keywords: [
+		"Legal Tech Blog",
+		"Law Firm Automation Insights",
+		"Workflow Automation Blueprints",
+		"PraxisFlow Engineering",
+	],
+	openGraph: {
+		title: "PraxisFlow Blog | Legal Automation & Technology",
+		description:
+			"Insights, updates, and thoughts on legal automation, private infrastructure, and operational efficiency.",
+		url: "https://www.praxisflow.com/blog",
+		type: "website",
+	},
+};
 
 export const dynamic = "force-dynamic";
 

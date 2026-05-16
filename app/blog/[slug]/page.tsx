@@ -12,21 +12,66 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({
 	params,
 }: {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }) {
 	try {
-		// Fetch SEO data for the <head>
+		const { slug } = await params;
+
+		// Populate 'seo', the default 'coverImage', and the nested 'metaImage' inside your seo component
 		const postsData = await fetchAPI("/posts", {
-			filters: { slug: { $eq: params.slug } },
-			populate: ["seo"],
+			filters: { slug: { $eq: slug } },
+			populate: ["seo", "seo.metaImage", "coverImage"],
 		});
 
 		const post = postsData.data[0];
 		if (!post) return {};
 
+		// Clean variable mapping with intelligent layout fallbacks
+		const title = post.seo?.metaTitle || post.title;
+		const description =
+			post.seo?.metaDescription ||
+			post.description ||
+			"Read the latest article on the PraxisFlow blog.";
+		const canonicalUrl =
+			post.seo?.canonicalURL || `https://www.praxisflow.com/blog/${slug}`;
+		const keywords = post.seo?.keywords || undefined; // If undefined, next.js uses layout keywords automatically
+
+		// 3-Tier Image Fallback Pipeline (Checks metaImage, then coverImage, then layout default)
+		// Change 'metaImage' to 'metalmage' below if your Strapi key has the lowercase 'l' typo!
+		const imageUrl =
+			post.seo?.metaImage?.url ||
+			post.coverImage?.url ||
+			"https://www.praxisflow.com/og-image.webp";
+
 		return {
-			title: post.seo?.metaTitle || post.title,
-			description: post.seo?.metaDescription,
+			title: title, // This cleanly inherits the "%s | PraxisFlow" template formatting from layout.tsx
+			description: description,
+			...(keywords && { keywords }), // Only overwrites keywords if explicitly provided in Strapi
+			alternates: { canonical: canonicalUrl },
+
+			openGraph: {
+				title: title,
+				description: description,
+				url: canonicalUrl,
+				siteName: "PraxisFlow",
+				locale: "en_US",
+				type: "article",
+				images: [
+					{
+						url: imageUrl,
+						width: 1200,
+						height: 630,
+						alt: title,
+					},
+				],
+			},
+
+			twitter: {
+				card: "summary_large_image",
+				title: title,
+				description: description,
+				images: [imageUrl],
+			},
 		};
 	} catch (error) {
 		console.error("Failed to fetch post metadata:", error);
@@ -37,15 +82,16 @@ export async function generateMetadata({
 export default async function SinglePostPage({
 	params,
 }: {
-	params: { slug: string };
+	params: Promise<{ slug: string }>; // 1. Updated type to Promise
 }) {
+	const { slug } = await params; // 2. Await and unwrap the slug here
 	let post = null;
 
 	try {
-		// Fetch the actual post content
+		// Fetch the actual post content using the unwrapped slug
 		const postsData = await fetchAPI("/posts", {
-			filters: { slug: { $eq: params.slug } },
-			populate: ["coverImage", "author"], // Note: 'content' is populated by default in Strapi 5
+			filters: { slug: { $eq: slug } }, // 3. Changed params.slug to slug
+			populate: ["coverImage", "author"],
 		});
 
 		post = postsData.data[0];
@@ -54,7 +100,7 @@ export default async function SinglePostPage({
 	}
 
 	if (!post) {
-		notFound(); // Triggers the Next.js 404 page
+		notFound();
 	}
 
 	return (
@@ -104,7 +150,6 @@ export default async function SinglePostPage({
 					)}
 
 					{/* Content */}
-					{/* We tighten the paragraph margins (my-4) and heading margins to pull content closer together */}
 					<div className="prose prose-lg max-w-none prose-headings:text-foreground prose-headings:mt-8 prose-headings:mb-4 prose-p:text-foreground prose-p:my-4 prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-blockquote:border-accent prose-code:text-accent prose-pre:bg-muted prose-ul:mt-4">
 						<BlocksRenderer content={post.content} />
 					</div>

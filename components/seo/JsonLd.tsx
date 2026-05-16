@@ -18,11 +18,11 @@ const JsonLd = () => {
 		contactPoint: {
 			"@type": "ContactPoint",
 			contactType: "customer service",
-			email: "contact@praxisflow.com", // Placeholder
+			email: "contact@praxisflow.com",
 		},
 		sameAs: [
-			"https://twitter.com/praxisflow", // Placeholder
-			"https://www.linkedin.com/company/praxisflow", // Placeholder
+			"https://twitter.com/praxisflow",
+			"https://www.linkedin.com/company/praxisflow",
 		],
 	};
 
