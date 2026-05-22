@@ -10,7 +10,7 @@ export function FAQsHomepage() {
 	const faqs = [
 		{
 			question: "How long does a typical automation take to build?",
-			answer: "Implementation timelines vary based on complexity, but most projects take 4-12 weeks from discovery to full deployment. Simple integrations might take 2-3 weeks, while comprehensive firm-wide automation could take 3 months. We provide a detailed project timeline during discovery and keep you updated throughout each phase.",
+			answer: "Implementation timelines vary based on complexity, but most projects take 4-12 weeks from discovery to full deployment. Simple integrations might take 2-3 weeks, while comprehensive firm-wide automation could take longer. We provide a detailed project timeline during discovery and keep you updated throughout each phase.",
 		},
 		{
 			question: "How do you build automation workflows?",
