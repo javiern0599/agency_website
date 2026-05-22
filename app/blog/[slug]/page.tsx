@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { draftMode } from "next/headers";
+import CommentsSection from "@/components/sections/CommentsSection";
 
 export const dynamic = "force-dynamic";
 
@@ -166,6 +167,10 @@ export default async function SinglePostPage({
 					</div>
 				</FadeIn>
 			</article>
+
+			<section className="max-w-4xl mx-auto py-6 px-6">
+				<CommentsSection documentId={post.documentId} />
+			</section>
 		</div>
 	);
 }

@@ -92,53 +92,61 @@ export default async function BlogPage() {
 			{/* Blog Posts Grid */}
 			<section className="pb-20 px-6 pt-10">
 				<div className="max-w-6xl mx-auto">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{posts.map((post: any) => (
-							/* 1. Add h-full to the wrapper elements */
-							<FadeIn
-								delay={0.3}
-								key={post.documentId}
-								className="h-full"
-							>
-								<Link
-									href={`/blog/${post.slug}`}
-									className="block h-full"
+					{Array.isArray(posts) && posts.length > 0 ? (
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+							{posts.map((post: any) => (
+								<FadeIn
+									delay={0.3}
+									key={post.documentId}
+									className="h-full"
 								>
-									{/* 2. Make the card a flex column with h-full */}
-									<div className="group flex flex-col h-full border border-border rounded-lg p-6 hover:shadow-lg hover:border-accent/20 transition-all duration-300 bg-card">
-										{post.coverImage && (
-											<img
-												src={post.coverImage.url}
-												alt={post.title}
-												className="w-full h-48 object-cover rounded-md mb-4  transition-transform duration-300"
-											/>
-										)}
-
-										{/* 3. Replaced whitespace-nowrap with line-clamp-2 */}
-										<h2 className="text-xl font-semibold text-foreground mb-4 group-hover:text-accent transition-colors line-clamp-2">
-											{post.title}
-										</h2>
-
-										{/* 4. Use mt-auto to push this metadata block to the absolute bottom of the card */}
-										<div className="mt-auto">
-											<p className="text-muted-foreground text-sm">
-												By{" "}
-												{post.author?.name ||
-													"PraxisFlow"}
-											</p>
-											{post.publishDate && (
-												<p className="text-muted-foreground text-xs mt-1">
-													{new Date(
-														post.publishDate,
-													).toLocaleDateString()}
-												</p>
+									<Link
+										href={`/blog/${post.slug}`}
+										className="block h-full"
+									>
+										<div className="group flex flex-col h-full border border-border rounded-lg p-6 hover:shadow-lg hover:border-accent/20 transition-all duration-300 bg-card">
+											{post.coverImage && (
+												<img
+													src={post.coverImage.url}
+													alt={post.title}
+													className="w-full h-48 object-cover rounded-md mb-4  transition-transform duration-300"
+												/>
 											)}
+
+											<h2 className="text-xl font-semibold text-foreground mb-4 group-hover:text-accent transition-colors line-clamp-2">
+												{post.title}
+											</h2>
+
+											<div className="mt-auto">
+												<p className="text-muted-foreground text-sm">
+													By{" "}
+													{post.author?.name ||
+														"PraxisFlow"}
+												</p>
+												{post.publishDate && (
+													<p className="text-muted-foreground text-xs mt-1">
+														{new Date(
+															post.publishDate,
+														).toLocaleDateString()}
+													</p>
+												)}
+											</div>
 										</div>
-									</div>
-								</Link>
-							</FadeIn>
-						))}
-					</div>
+									</Link>
+								</FadeIn>
+							))}
+						</div>
+					) : (
+						<div className="rounded-lg border border-border bg-card p-8 text-center">
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
+								No posts available
+							</h2>
+							<p className="text-muted-foreground">
+								We couldn't load posts right now. Please check
+								your Strapi backend or try again later.
+							</p>
+						</div>
+					)}
 				</div>
 			</section>
 		</div>
