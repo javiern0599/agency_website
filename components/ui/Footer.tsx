@@ -57,7 +57,7 @@ export default function Footer() {
 									href="https://youtube.com/@praxisflow?si=CSOvYqiwZv8DRbUM"
 									target="_blank"
 									rel="noreferrer"
-									className="hover:text-accent transition-colors"
+									className="text-muted-foreground/90 hover:text-accent transition-colors"
 								>
 									<Youtube className="w-6 h-6" />
 								</a>

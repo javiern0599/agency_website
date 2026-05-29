@@ -131,7 +131,7 @@ export default async function SinglePostPage({
 			</section>
 
 			{/* Article */}
-			<article className="max-w-4xl mx-auto py-10 px-6">
+			<article className="max-w-4xl mx-auto pt-10 px-6">
 				<FadeIn>
 					<header className="mb-8">
 						<h1 className="text-3xl md:text-5xl font-medium text-foreground tracking-tight mb-4">

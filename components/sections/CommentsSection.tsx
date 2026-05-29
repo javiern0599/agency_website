@@ -177,7 +177,7 @@ function CommentItem({
 									value={rName}
 									onChange={(e) => setRName(e.target.value)}
 									required
-									className="w-full rounded-md p-2 border"
+									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 									style={{
 										background: "transparent",
 										borderColor: "hsl(var(--input))",
@@ -190,7 +190,7 @@ function CommentItem({
 									onChange={(e) => setREmail(e.target.value)}
 									type="email"
 									required
-									className="w-full rounded-md p-2 border"
+									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 									style={{
 										background: "transparent",
 										borderColor: "hsl(var(--input))",
@@ -207,7 +207,7 @@ function CommentItem({
 									}
 									required
 									rows={3}
-									className="w-full rounded-md p-2 border"
+									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 									style={{
 										background: "transparent",
 										borderColor: "hsl(var(--input))",
@@ -219,12 +219,7 @@ function CommentItem({
 								<button
 									type="button"
 									onClick={cancelReply}
-									className="inline-flex items-center px-3 py-1 rounded-md text-sm"
-									style={{
-										background: "transparent",
-										border: "1px solid hsl(var(--input))",
-										color: "hsl(var(--foreground))",
-									}}
+									className="bg-transparent border border-input inline-flex items-center px-3 py-1 rounded-md text-sm text-foreground hover:bg-muted/90 transition-colors"
 								>
 									Cancel
 								</button>
@@ -232,12 +227,7 @@ function CommentItem({
 								<button
 									type="submit"
 									disabled={rSubmitting}
-									className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium"
-									style={{
-										background: "hsl(var(--primary))",
-										color: "hsl(var(--primary-foreground))",
-										opacity: rSubmitting ? 0.7 : 1,
-									}}
+									className="bg-primary text-white inline-flex items-center px-3 py-1 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm disabled:bg-primary/70 disabled:cursor-not-allowed"
 								>
 									{rSubmitting ? "Submitting..." : "Reply"}
 								</button>
@@ -389,7 +379,7 @@ export default function CommentsSection({ documentId }: Props) {
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
-								className="w-full rounded-md p-2 border"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
@@ -403,7 +393,7 @@ export default function CommentsSection({ documentId }: Props) {
 								onChange={(e) => setEmail(e.target.value)}
 								type="email"
 								required
-								className="w-full rounded-md p-2 border"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
@@ -420,7 +410,7 @@ export default function CommentsSection({ documentId }: Props) {
 								onChange={(e) => setContent(e.target.value)}
 								required
 								rows={4}
-								className="w-full rounded-md p-2 border"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
@@ -433,12 +423,7 @@ export default function CommentsSection({ documentId }: Props) {
 							<button
 								type="submit"
 								disabled={submitting}
-								className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
-								style={{
-									background: "hsl(var(--primary))",
-									color: "hsl(var(--primary-foreground))",
-									opacity: submitting ? 0.7 : 1,
-								}}
+								className="bg-primary text-white inline-flex items-center px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm disabled:bg-primary/70 disabled:cursor-not-allowed"
 							>
 								{submitting ? "Submitting..." : "Post comment"}
 							</button>
