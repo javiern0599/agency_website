@@ -28,7 +28,7 @@ interface Props {
 	documentId: string | number;
 }
 
-const BASE = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const BASE = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
 function formatDate(dateStr?: string) {
 	if (!dateStr) return "";
@@ -177,26 +177,30 @@ function CommentItem({
 									value={rName}
 									onChange={(e) => setRName(e.target.value)}
 									required
-									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
 									style={{
 										background: "transparent",
 										borderColor: "hsl(var(--input))",
 										color: "hsl(var(--foreground))",
 									}}
 								/>
-								<input
-									placeholder="Email"
-									value={rEmail}
-									onChange={(e) => setREmail(e.target.value)}
-									type="email"
-									required
-									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-									style={{
-										background: "transparent",
-										borderColor: "hsl(var(--input))",
-										color: "hsl(var(--foreground))",
-									}}
-								/>
+								<div className="">
+									<input
+										placeholder="Email (used for moderation, not public)"
+										value={rEmail}
+										onChange={(e) =>
+											setREmail(e.target.value)
+										}
+										type="email"
+										required
+										className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
+										style={{
+											background: "transparent",
+											borderColor: "hsl(var(--input))",
+											color: "hsl(var(--foreground))",
+										}}
+									/>
+								</div>
 							</div>
 							<div>
 								<textarea
@@ -207,7 +211,7 @@ function CommentItem({
 									}
 									required
 									rows={3}
-									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+									className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
 									style={{
 										background: "transparent",
 										borderColor: "hsl(var(--input))",
@@ -379,7 +383,7 @@ export default function CommentsSection({ documentId }: Props) {
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
-								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
@@ -388,12 +392,12 @@ export default function CommentsSection({ documentId }: Props) {
 							/>
 							<input
 								aria-label="Email"
-								placeholder="Email"
+								placeholder="Email (used for moderation, not public)"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								type="email"
 								required
-								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
@@ -410,7 +414,7 @@ export default function CommentsSection({ documentId }: Props) {
 								onChange={(e) => setContent(e.target.value)}
 								required
 								rows={4}
-								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+								className="w-full rounded-md p-2 border border-border focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-sm md:placeholder:text-base"
 								style={{
 									background: "transparent",
 									borderColor: "hsl(var(--input))",
