@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -112,7 +113,12 @@ export default function RootLayout({
 			</head>
 			<body className={inter.className}>
 				{/* Initializes the Meta Pixel event listeners across router shifts */}
-				<MetaPixel />
+				{/* FIX: Wrap MetaPixel in a Suspense boundary. 
+                  This catches the CSR bailout and lets the static 404 page compile perfectly.
+                */}
+				<Suspense fallback={null}>
+					<MetaPixel />
+				</Suspense>
 
 				<JsonLd />
 				<Navbar />
