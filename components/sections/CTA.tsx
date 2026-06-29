@@ -4,15 +4,26 @@ import { ShimmerButton } from "../ui/shimmer-button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FadeIn } from "../ui/fade-in";
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from "@next/third-parties/google";
+import * as pixel from "@/lib/fpixel";
 
 export default function CTA() {
-
 	const handleBookingClick = () => {
-		sendGAEvent('event', 'cta_booking_click', {
-			event_category: 'conversion',
+		const currentPath =
+			typeof window !== "undefined"
+				? window.location.pathname
+				: "unknown";
+
+		sendGAEvent("event", "cta_booking_click", {
+			event_category: "conversion",
 			// This tell the marketing person exactly which page they were on
-			location: typeof window !== 'undefined' ? window.location.pathname : 'unknown'
+			location: currentPath,
+		});
+		// NEW: Meta Pixel Standard Schedule Event
+		pixel.event("Schedule", {
+			content_name: "Discovery Call Request",
+			content_category: "Conversion",
+			location_source: currentPath,
 		});
 	};
 

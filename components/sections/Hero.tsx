@@ -5,6 +5,7 @@ import { ShimmerButton } from "../ui/shimmer-button";
 import { Ripple } from "../ui/ripple";
 import { FadeIn } from "../ui/fade-in";
 import { sendGAEvent } from "@next/third-parties/google";
+import * as pixel from "@/lib/fpixel";
 
 export default function Hero() {
 	return (
@@ -46,12 +47,18 @@ export default function Hero() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="w-full sm:w-auto"
-							onClick={() =>
+							onClick={() => {
+								// GA Event
 								sendGAEvent("event", "hero_cta_click", {
 									event_category: "engagement",
 									event_label: "Let's Talk Growth",
-								})
-							}
+								});
+								// NEW: Meta Pixel Standard Event
+								pixel.event("Contact", {
+									content_category: "Engagement",
+									content_name: "Let's Talk Growth",
+								});
+							}}
 						>
 							<ShimmerButton
 								className="w-full px-8 py-3.5 rounded-2xl font-medium"

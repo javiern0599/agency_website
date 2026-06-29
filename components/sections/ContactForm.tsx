@@ -5,6 +5,7 @@ import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sendGAEvent } from "@next/third-parties/google";
+import * as pixel from "@/lib/fpixel";
 
 export function ContactForm() {
 	const [status, setStatus] = useState<
@@ -117,6 +118,13 @@ export function ContactForm() {
 			sendGAEvent("event", "generate_lead", {
 				currency: "USD",
 				value: 0, // We can set a lead value if we want
+			});
+
+			// NEW: Track the conversion with Meta Pixel Standard Lead Event
+			pixel.event("Lead", {
+				currency: "USD",
+				value: 0, // We can also set a lead value if we want
+				content_name: formData.firm,
 			});
 
 			setStatus("success");

@@ -7,15 +7,16 @@ import Footer from "../components/ui/Footer";
 import JsonLd from "../components/seo/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from '@next/third-parties/google'
-// import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import MetaPixel from "@/components/seo/MetaPixel";
+import { FB_PIXEL_ID } from "@/lib/fpixel";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.praxisflow.com"),
 	alternates: {
-		canonical: "/", // this generates <link rel="canonical" href="https://www.praxisflow.com" />
+		canonical: "/",
 	},
 	title: {
 		default:
@@ -60,18 +61,13 @@ export const metadata: Metadata = {
 	},
 	icons: {
 		icon: [
-			// 1. svg for modern browsers
 			{ url: "/isotipo-base.svg", type: "image/svg+xml" },
-
-			// 2. Google search results
 			{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
 			{
 				url: "/android-chrome-192x192.png",
 				sizes: "192x192",
 				type: "image/png",
 			},
-
-			// 3. Fallback for older browsers
 			{ url: "/favicon.ico", sizes: "any" },
 		],
 		apple: [
@@ -102,8 +98,22 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				{/* Meta Pixel Server Noscript Fallback Injection */}
+				<noscript>
+					<img
+						height="1"
+						width="1"
+						style={{ display: "none" }}
+						src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+						alt=""
+					/>
+				</noscript>
+			</head>
 			<body className={inter.className}>
-				{/* <ScrollProgress /> */}
+				{/* Initializes the Meta Pixel event listeners across router shifts */}
+				<MetaPixel />
+
 				<JsonLd />
 				<Navbar />
 				<main className="min-h-screen flex flex-col items-center justify-between">
@@ -112,24 +122,28 @@ export default function RootLayout({
 				<Footer />
 				<Analytics />
 				<SpeedInsights />
+
+				{/* Chatwoot Live Chat SDK */}
 				<Script strategy="afterInteractive">
 					{`
-						(function(d,t) {
-							var BASE_URL="https://chat.praxisflow.com";
-							var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-							g.src=BASE_URL+"/packs/js/sdk.js";
-							g.async = true;
-							s.parentNode.insertBefore(g,s);
-							g.onload=function(){
-								window.chatwootSDK.run({
-									websiteToken: 'm6VPYKPLTetKeZBwYqk4A6Bj',
-									baseUrl: BASE_URL
-								})
-							}
-						})(document,"script");
-					`}
+                        (function(d,t) {
+                            var BASE_URL="https://chat.praxisflow.com";
+                            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                            g.src=BASE_URL+"/packs/js/sdk.js";
+                            g.async = true;
+                            s.parentNode.insertBefore(g,s);
+                            g.onload=function(){
+                                window.chatwootSDK.run({
+                                    websiteToken: 'm6VPYKPLTetKeZBwYqk4A6Bj',
+                                    baseUrl: BASE_URL
+                                })
+                            }
+                        })(document,"script");
+                    `}
 				</Script>
-				<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
+				<GoogleAnalytics
+					gaId={process.env.NEXT_PUBLIC_GA_ID as string}
+				/>
 			</body>
 		</html>
 	);
