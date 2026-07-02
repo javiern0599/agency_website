@@ -157,8 +157,8 @@ export function ContactForm() {
 					Message Sent!
 				</h2>
 				<p className="text-muted-foreground">
-					Thank you for reaching out. We'll get back to you shortly to
-					schedule your workflow audit.
+					Thank you for reaching out. You'll receive an email shortly
+					to schedule your free workflow audit.
 				</p>
 				<button
 					onClick={() => setStatus("idle")}
@@ -323,10 +323,10 @@ export function ContactForm() {
 						{status === "loading" ? (
 							<>
 								<Loader2 className="w-5 h-5 animate-spin" />
-								Subscribing...
+								Sending...
 							</>
 						) : (
-							"Subscribe"
+							"Send Message"
 						)}
 					</span>
 				</ShimmerButton>
