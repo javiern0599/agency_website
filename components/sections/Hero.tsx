@@ -35,7 +35,7 @@ export default function Hero() {
 					</h1>
 
 					<p className="text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-						We build bespoke automation workflows for boutique law
+						We build bespoke automation workflows for law
 						firms. Reclaim valuable time by automating processes
 						critical to law firm revenue generation.
 					</p>
