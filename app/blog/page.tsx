@@ -2,9 +2,13 @@ import { fetchAPI } from "@/lib/strapi";
 import Link from "next/link";
 import { FadeIn } from "@/components/ui/fade-in";
 import { DotPattern } from "@/components/ui/dot-pattern";
+import { BlogPagination } from "@/components/ui/blog-pagination";
+import BlogFilters from "@/components/sections/BlogFilters";
+import { getBlogCategories } from "@/lib/blog-categories";
 import { cn } from "@/lib/utils";
-import next from "next";
 import type { Metadata } from "next";
+
+const PAGE_SIZE = 6;
 
 export const metadata: Metadata = {
 	title: "Blog", // This plugs into the root layout's "%s | PraxisFlow" template automatically!
@@ -27,16 +31,61 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function BlogPage() {
+export default async function BlogPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string; category?: string; q?: string }>;
+}) {
+	const {
+		page: pageParam,
+		category: categoryParam,
+		q: queryParam,
+	} = await searchParams;
+
+	// Parse and clamp the requested page to a valid positive integer.
+	const parsedPage = Number.parseInt(pageParam ?? "1", 10);
+	const requestedPage =
+		Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+
+	const searchQuery = queryParam?.trim() || undefined;
+
+	// Load the available categories and resolve the active slug to its exact
+	// Strapi value (the multi-select stores display names, not slugs).
+	const categories = await getBlogCategories();
+	const activeCategory = categoryParam
+		? categories.find((c) => c.slug === categoryParam)
+		: undefined;
+
+	// Build Strapi filters. Category is a multi-select array, so $containsi
+	// (substring match) is the operator that matches; $eq/$in do not.
+	const filters: Record<string, unknown> = {};
+	if (activeCategory) {
+		filters.category = { $containsi: activeCategory.name };
+	}
+	if (searchQuery) {
+		// Posts have no top-level description field, so search targets the title.
+		filters.title = { $containsi: searchQuery };
+	}
+
+	const isFiltering = Boolean(activeCategory || searchQuery);
+
 	let posts = [];
+	let currentPage = requestedPage;
+	let pageCount = 1;
+	let fetchFailed = false;
 
 	try {
-		// Fetch posts and populate the coverImage and author
+		// Fetch a single page of posts, populating the coverImage and author
 		const postsData = await fetchAPI(
 			"/posts",
 			{
 				populate: ["coverImage", "author"],
 				sort: ["publishDate:desc"],
+				...(Object.keys(filters).length > 0 && { filters }),
+				pagination: {
+					page: requestedPage,
+					pageSize: PAGE_SIZE,
+				},
 			},
 			{
 				next: {
@@ -46,8 +95,12 @@ export default async function BlogPage() {
 		);
 
 		posts = postsData.data;
+		// Strapi returns the resolved pagination meta, which may clamp the page.
+		currentPage = postsData.meta?.pagination?.page ?? requestedPage;
+		pageCount = postsData.meta?.pagination?.pageCount ?? 1;
 	} catch (error) {
 		console.error("Failed to fetch blog posts:", error);
+		fetchFailed = true;
 		// posts remains empty array
 	}
 
@@ -92,6 +145,12 @@ export default async function BlogPage() {
 			{/* Blog Posts Grid */}
 			<section className="pb-20 px-6 pt-10">
 				<div className="max-w-6xl mx-auto">
+					<BlogFilters
+						categories={categories}
+						activeCategory={activeCategory?.slug}
+						activeQuery={searchQuery}
+					/>
+
 					{Array.isArray(posts) && posts.length > 0 ? (
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 							{posts.map((post: any) => (
@@ -136,6 +195,22 @@ export default async function BlogPage() {
 								</FadeIn>
 							))}
 						</div>
+					) : isFiltering && !fetchFailed ? (
+						<div className="rounded-lg border border-border bg-card p-8 text-center">
+							<h2 className="text-2xl font-semibold text-foreground mb-2">
+								No matching posts
+							</h2>
+							<p className="text-muted-foreground mb-4">
+								No posts match your current search or category.
+								Try a different term or clear the filters.
+							</p>
+							<Link
+								href="/blog"
+								className="inline-flex items-center text-accent hover:underline text-sm font-medium"
+							>
+								Clear filters
+							</Link>
+						</div>
 					) : (
 						<div className="rounded-lg border border-border bg-card p-8 text-center">
 							<h2 className="text-2xl font-semibold text-foreground mb-2">
@@ -146,6 +221,17 @@ export default async function BlogPage() {
 								your Strapi backend or try again later.
 							</p>
 						</div>
+					)}
+
+					{Array.isArray(posts) && posts.length > 0 && (
+						<BlogPagination
+							currentPage={currentPage}
+							pageCount={pageCount}
+							params={{
+								category: activeCategory?.slug,
+								q: searchQuery,
+							}}
+						/>
 					)}
 				</div>
 			</section>
