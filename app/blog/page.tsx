@@ -104,6 +104,10 @@ export default async function BlogPage({
 		// posts remains empty array
 	}
 
+	// Changes whenever the result set changes so the grid remounts and every
+	// visible card re-runs its entrance animation together (not just new ones).
+	const resultsKey = `${activeCategory?.slug ?? "all"}:${searchQuery ?? ""}:${currentPage}`;
+
 	return (
 		<div className="w-full min-h-screen bg-background">
 			{/* Hero Section */}
@@ -152,10 +156,13 @@ export default async function BlogPage({
 					/>
 
 					{Array.isArray(posts) && posts.length > 0 ? (
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-							{posts.map((post: any) => (
+						<div
+							key={resultsKey}
+							className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+						>
+							{posts.map((post: any, idx: number) => (
 								<FadeIn
-									delay={0.3}
+									delay={0.1 + idx * 0.05}
 									key={post.documentId}
 									className="h-full"
 								>
