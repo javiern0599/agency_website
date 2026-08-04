@@ -23,12 +23,12 @@ export function Pricing() {
 				className="text-center mb-16 max-w-3xl mx-auto"
 			>
 				<h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-4">
-					Your Investment in Intelligent Automation
+					Pay once to build it. Monthly support is optional.
 				</h2>
 				<p className="text-muted-foreground text-lg">
-					Every firm is unique. Our solutions are custom-tailored to
-					your specific needs, delivering measurable ROI and ongoing
-					support.
+					Every firm is different, so every quote is too. You get a
+					clear, fixed price up front, no hidden costs, no surprises,
+					and no long-term contract required.
 				</p>
 			</motion.div>
 
@@ -96,8 +96,8 @@ export function Pricing() {
 					<p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
 						A predictable monthly fee for continuous monitoring,
 						maintenance, updates, and dedicated support for your
-						automated infrastructure. Ensures uninterrupted
-						efficiency and peace of mind.
+						automations. Ensures uninterrupted efficiency and peace
+						of mind.
 					</p>
 
 					<div className="pt-8 border-t border-border">
@@ -129,11 +129,12 @@ export function Pricing() {
 							Our comprehensive engagement model ensures you get
 							value from day one and sustainable growth forever.
 						</p>
-						<Link 
-                            href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
+						<Link
+							href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
 							target="_blank"
 							rel="noopener noreferrer"
-                            className="inline-block">
+							className="inline-block"
+						>
 							<div className="group relative overflow-hidden rounded-2xl bg-accent px-8 py-4 transition-all hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20">
 								<AnimatedShinyText className="inline-flex items-center justify-center gap-2 text-lg font-medium text-primary-foreground transition ease-out hover:text-primary-foreground/90 hover:duration-300 bg-gradient-to-r from-transparent via-white/80 via-50% to-transparent dark:via-white/80">
 									<span>Schedule a Free Discovery Call</span>
@@ -187,9 +188,9 @@ export function Pricing() {
 					If you have an idea to improve your workflow, we may be able
 					to do it.{" "}
 					<Link
-                        href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
-                        target="_blank"
-                        rel="noopener noreferrer"
+						href="https://calendar.app.google/AtTiu5d3kd2EwumQ8"
+						target="_blank"
+						rel="noopener noreferrer"
 						className="text-accent hover:underline underline-offset-4"
 					>
 						Schedule a free consultation

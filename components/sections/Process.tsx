@@ -26,10 +26,9 @@ export default function Process() {
 						Our End-to-End Process
 					</h2>
 					<p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
-						We handle everything from infrastructure provisioning
-						and security hardening to custom workflow design and
-						ongoing management, so you can focus on practicing law
-						and generating cashflow.
+						We handle the entire build from secure setup to custom
+						design and ongoing support so you can focus on
+						practicing law and growing your firm.
 					</p>
 				</motion.div>
 
@@ -112,9 +111,10 @@ export default function Process() {
 									Development
 								</h3>
 								<p className="text-sm text-slate-400 leading-relaxed relative z-10">
-									Our team builds custom automation
-									infrastructure that seamlessly integrates
-									with your existing tools and systems.
+									Our team builds your custom automations and
+									connects them to the tools you already use.
+									No rip-and-replace, no new software to
+									learn.
 								</p>
 							</div>
 

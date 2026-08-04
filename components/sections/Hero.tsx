@@ -23,7 +23,7 @@ export default function Hero() {
 				<FadeIn>
 					<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-8 animate-fade-in-up">
 						<span className="flex h-2 w-2 rounded-full bg-accent"></span>
-						Revenue-First Workflows
+						Automation for Law Firms
 					</div>
 
 					<h1 className="text-5xl md:text-7xl font-medium text-foreground tracking-tighter mb-6 max-w-4xl mx-auto leading-[1.1]">
@@ -35,9 +35,9 @@ export default function Hero() {
 					</h1>
 
 					<p className="text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-						We build bespoke automation workflows for law
-						firms. Reclaim valuable time by automating processes
-						critical to law firm revenue generation.
+						We build bespoke automation workflows for law firms.
+						Reclaim valuable time by automating processes critical
+						to law firm revenue generation.
 					</p>
 				</FadeIn>
 				<FadeIn delay={0.2}>

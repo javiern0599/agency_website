@@ -8,9 +8,9 @@ export default function Security() {
 	const securityFeatures = [
 		{
 			icon: Shield,
-			title: "Secure Infrastructure & Data Protection",
+			title: "A Private Environment That's Yours Alone",
 			description:
-				"Your automation workflows are protected secure access controls, private environments, encryption, and reliable backups to keep everything safe and accessible.",
+				"Your automations run in an environment dedicated to your firm, never shared with other companies. Protected by encryption, strict access controls, and reliable backups.",
 		},
 		{
 			icon: GitBranch,
@@ -37,12 +37,12 @@ export default function Security() {
 					className="text-center mb-16"
 				>
 					<h2 className="text-4xl md:text-5xl font-medium text-white tracking-tight mb-4">
-						Your Security is Our Priority
+						Your Client Data Stays Yours
 					</h2>
 					<p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-						We prioritize keeping your information safe, private,
-						and always available with comprehensive security
-						measures.
+						Your data never mingles with other firms' in a shared
+						tool. Every firm gets a private, isolated environment
+						that is protected, backed up, and always available.
 					</p>
 				</motion.div>
 
