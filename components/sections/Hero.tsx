@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle, Check } from "lucide-react";
 import { ShimmerButton } from "../ui/shimmer-button";
 import { Ripple } from "../ui/ripple";
 import { FadeIn } from "../ui/fade-in";
@@ -9,7 +9,7 @@ import * as pixel from "@/lib/fpixel";
 
 export default function Hero() {
 	return (
-		<section className="relative pt-32 pb-20 md:pt-48 md:pb-16 px-6 max-w-7xl mx-auto text-center bg-background overflow-hidden">
+		<section className="relative pt-32 pb-20 md:pt-40 md:pb-16 px-6 max-w-7xl mx-auto text-center bg-background overflow-hidden">
 			{/* Ripple Background Effect */}
 			<Ripple
 				mainCircleSize={420}
@@ -34,11 +34,28 @@ export default function Hero() {
 						</span>
 					</h1>
 
-					<p className="text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+					<p className="text-lg md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-light">
 						We build bespoke automation workflows for law firms.
 						Reclaim valuable time by automating processes critical
-						to law firm revenue generation.
+						to revenue generation.
 					</p>
+				</FadeIn>
+				<FadeIn delay={0.15}>
+					<div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mb-10 text-sm text-muted-foreground">
+						{[
+							"Connect your existing tools",
+							"Private & confidential",
+							"Tailored to your workflow",
+						].map((item) => (
+							<span
+								key={item}
+								className="inline-flex items-center gap-2"
+							>
+								<Check className="w-4 h-4 text-accent" />
+								{item}
+							</span>
+						))}
+					</div>
 				</FadeIn>
 				<FadeIn delay={0.2}>
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -51,12 +68,12 @@ export default function Hero() {
 								// GA Event
 								sendGAEvent("event", "hero_cta_click", {
 									event_category: "engagement",
-									event_label: "Let's Talk Growth",
+									event_label: "Book a Free Discovery Call",
 								});
 								// NEW: Meta Pixel Standard Event
 								pixel.event("Contact", {
 									content_category: "Engagement",
-									content_name: "Let's Talk Growth",
+									content_name: "Book a Free Discovery Call",
 								});
 							}}
 						>
@@ -68,7 +85,7 @@ export default function Hero() {
 								shimmerSize="0.30em"
 							>
 								<span className="flex items-center justify-center gap-2 text-primary-foreground">
-									Let's talk growth
+									Book a Free Discovery Call
 									<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
 								</span>
 							</ShimmerButton>
