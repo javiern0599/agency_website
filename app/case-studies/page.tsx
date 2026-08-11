@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 import { successCases } from "@/lib/successCases";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/case-studies" },
 	title: "Case Studies",
 	description:
 		"See how we've helped boutique law firms save thousands of hours and increase revenue through custom automation.",

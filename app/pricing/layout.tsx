@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/pricing" },
 	title: "Pricing",
 	description:
 		"Transparent, value-based investment for legal automation. No hourly billing, no surprises. Just clear ROI and a partnership built on trust.",

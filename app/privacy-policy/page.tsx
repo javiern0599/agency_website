@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/privacy-policy" },
 	title: "Privacy Policy",
 	description: "Our commitment to protecting your data and privacy.",
 	openGraph: {

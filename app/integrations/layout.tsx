@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/integrations" },
 	title: "Integrations",
 	description:
 		"Connect any tool and automate everything. Bridge the gap between your Practice Management System and 1000+ productivity tools with custom n8n workflows.",

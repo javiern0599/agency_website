@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/sections/ContactForm";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/contact" },
 	title: "Contact",
 	description:
 		"Start your firm's transformation. Schedule a free workflow audit to identify your biggest automation opportunities.",

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/terms-of-use" },
 	title: "Terms of Use",
 	description: "Terms and conditions for using PraxisFlow services.",
 	openGraph: {

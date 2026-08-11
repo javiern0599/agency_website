@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 const PAGE_SIZE = 6;
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/blog" },
 	title: "Blog", // This plugs into the root layout's "%s | PraxisFlow" template automatically!
 	description:
 		"Insights, updates, and thoughts on legal automation, private infrastructure, and operational efficiency.",

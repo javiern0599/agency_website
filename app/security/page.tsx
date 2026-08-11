@@ -6,6 +6,7 @@ import { Lock, Shield, Eye, ShieldCheck, CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/security" },
 	title: "Security",
 	description:
 		"Your legal workflows and sensitive data are protected through dedicated infrastructure, strict access controls, and layered safeguards.",

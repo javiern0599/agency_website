@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+	alternates: { canonical: "/about" },
 	title: "About Us",
 	description:
 		"Engineering the future of legal operations. We simplify complex workflows through intelligent automation, allowing attorneys to focus on billable work.",
