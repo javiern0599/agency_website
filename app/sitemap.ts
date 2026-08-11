@@ -26,6 +26,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			priority: 0.9,
 		},
 		{
+			url: `${baseUrl}/law-firm-automation`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.9,
+		},
+		{
 			url: `${baseUrl}/integrations`,
 			lastModified: new Date(),
 			changeFrequency: "monthly",

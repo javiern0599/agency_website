@@ -85,6 +85,14 @@ export default function Footer() {
 								<ul className="space-y-2 text-sm text-muted-foreground">
 									<li>
 										<a
+											href="/law-firm-automation"
+											className="hover:text-accent transition-colors"
+										>
+											Law Firm Automation
+										</a>
+									</li>
+									<li>
+										<a
 											href="/integrations"
 											className="hover:text-accent transition-colors"
 										>

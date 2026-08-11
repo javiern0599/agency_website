@@ -82,8 +82,18 @@ input[type="search"]::-webkit-search-decoration {
 		@apply border-border;
 	}
 
-	html {
-		scroll-behavior: smooth;
+	/*
+	 * Smooth-scroll only when an in-page anchor (#hash) is active. Applying
+	 * `scroll-behavior: smooth` to `html` unconditionally breaks Next's
+	 * scroll-to-top on route changes — navigating from a deep scroll (e.g. the
+	 * FAQ near the page bottom) lands you at the bottom of the next page.
+	 * Scoping to `:has(:target)` keeps anchor jumps smooth while letting normal
+	 * navigation reset to the top instantly.
+	 */
+	@media (prefers-reduced-motion: no-preference) {
+		html:has(:target) {
+			scroll-behavior: smooth;
+		}
 	}
 
 	body {
