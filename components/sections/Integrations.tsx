@@ -17,7 +17,7 @@ export default function SocialProof() {
 	return (
 		<section
 			id="integrations"
-			className="py-12 border-y border-border bg-secondary/50 overflow-hidden"
+			className="py-8 border-y border-border bg-secondary/50 overflow-hidden"
 		>
 			<div className="max-w-7xl mx-auto px-6 text-center">
 				<FadeIn margin="0px">
@@ -28,7 +28,7 @@ export default function SocialProof() {
 						{integrations.map((integration, idx) => (
 							<div
 								key={idx}
-								className="group flex items-center justify-center gap-2 mx-12 opacity-60 hover:opacity-100 transition-all grayscale hover:grayscale-0 duration-300"
+								className="group flex items-center justify-center gap-2 mx-12 opacity-80 hover:opacity-100 transition-all grayscale hover:grayscale-0 duration-300"
 							>
 								<Image
 									src={integration.icon}

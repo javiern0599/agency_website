@@ -9,7 +9,7 @@ import * as pixel from "@/lib/fpixel";
 
 export default function Hero() {
 	return (
-		<section className="relative pt-32 pb-20 md:pt-40 md:pb-16 px-6 max-w-7xl mx-auto text-center bg-background overflow-hidden">
+		<section className="relative pt-32 pb-20 md:pt-44 md:pb-16 px-6 max-w-7xl mx-auto text-center bg-background overflow-hidden">
 			{/* Ripple Background Effect */}
 			<Ripple
 				mainCircleSize={420}

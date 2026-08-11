@@ -341,7 +341,7 @@ export default function Services() {
 			id="services"
 			className="py-24 max-w-7xl mx-auto px-6 bg-background"
 		>
-			<FadeIn margin="-200px">
+			<FadeIn margin="-100px">
 				<div className="mb-16 md:mb-24">
 					<h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-4">
 						End-to-End Automation for Law Firms
