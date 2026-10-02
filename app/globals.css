@@ -96,6 +96,11 @@ input[type="search"]::-webkit-search-decoration {
 		}
 	}
 
+	/* Anchor targets land below the fixed navbar (h-16), not under it. */
+	html {
+		scroll-padding-top: 4rem;
+	}
+
 	body {
 		@apply bg-background text-foreground;
 	}

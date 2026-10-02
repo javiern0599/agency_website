@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import MetaPixel from "@/components/seo/MetaPixel";
+import { HashScroll } from "@/components/ui/hash-scroll";
 import { FB_PIXEL_ID } from "@/lib/fpixel";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -121,6 +122,7 @@ export default function RootLayout({
 				</Suspense>
 
 				<JsonLd />
+				<HashScroll />
 				<Navbar />
 				<main className="min-h-screen flex flex-col items-center justify-between">
 					{children}
