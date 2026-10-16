@@ -42,8 +42,23 @@ input[type="search"]::-webkit-search-decoration {
 		--input: 214 32% 91%;
 		--ring: 175 84% 32%;
 		/* Teal ring */
-		--radius: 0.75rem;
-		/* Rounded-xl */
+		/* Paper corners: near-square everywhere. */
+		--radius: 0.125rem;
+
+		/* Terms of Engagement palette (same brand colors, named by role) */
+		/* INK: #0f172a, headings and dark bands */
+		--ink: 222 47% 11%;
+		/* DESK: #eef2f6, the surface the "documents" sit on */
+		--desk: 210 31% 95%;
+		/* RULE: #cbd5e1, hairlines that carry structure */
+		--rule: 213 27% 84%;
+		/* ACCENT-INK: #0f766e, teal for text (AA on white and desk) */
+		--accent-ink: 175 77% 26%;
+		/* DEEP: #0c665b, brand deep teal */
+		--deep: 173 79% 22%;
+
+		--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+		--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
 		/* Custom Animation Variables */
 		--shiny-width: 100%;
@@ -83,15 +98,13 @@ input[type="search"]::-webkit-search-decoration {
 	}
 
 	/*
-	 * Smooth-scroll only when an in-page anchor (#hash) is active. Applying
-	 * `scroll-behavior: smooth` to `html` unconditionally breaks Next's
-	 * scroll-to-top on route changes — navigating from a deep scroll (e.g. the
-	 * FAQ near the page bottom) lands you at the bottom of the next page.
-	 * Scoping to `:has(:target)` keeps anchor jumps smooth while letting normal
-	 * navigation reset to the top instantly.
+	 * Smooth scrolling for in-page links (e.g. "Meet the staff" -> #staff).
+	 * <html data-scroll-behavior="smooth"> (app/layout.tsx) tells Next.js to
+	 * switch smooth scrolling off while it changes pages, so a route change
+	 * still starts at the top instead of animating from the old position.
 	 */
 	@media (prefers-reduced-motion: no-preference) {
-		html:has(:target) {
+		html {
 			scroll-behavior: smooth;
 		}
 	}
@@ -103,6 +116,10 @@ input[type="search"]::-webkit-search-decoration {
 
 	body {
 		@apply bg-background text-foreground;
+	}
+
+	::selection {
+		background: hsl(var(--accent) / 0.2);
 	}
 }
 

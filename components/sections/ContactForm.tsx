@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sendGAEvent } from "@next/third-parties/google";
@@ -151,9 +150,9 @@ export function ContactForm() {
 		return (
 			<div className="text-center py-12 space-y-4">
 				<div className="flex justify-center">
-					<CheckCircle2 className="w-16 h-16 text-teal-500 animate-in zoom-in duration-300" />
+					<CheckCircle2 className="h-14 w-14 text-accent-ink" strokeWidth={1.25} />
 				</div>
-				<h2 className="text-2xl font-bold text-foreground">
+				<h2 className="font-serif text-[28px] text-ink">
 					Message Sent!
 				</h2>
 				<p className="text-muted-foreground">
@@ -162,7 +161,7 @@ export function ContactForm() {
 				</p>
 				<button
 					onClick={() => setStatus("idle")}
-					className="text-primary font-medium hover:underline"
+					className="font-medium text-ink underline decoration-accent underline-offset-4"
 				>
 					Send another message
 				</button>
@@ -190,14 +189,14 @@ export function ContactForm() {
 						placeholder="John Doe"
 						disabled={status === "loading"}
 						className={cn(
-							"w-full px-4 py-3 bg-background border rounded-lg text-foreground focus:outline-none focus:ring-2 disabled:opacity-50 transition-colors",
+							"w-full rounded-sm border bg-white px-4 py-3 text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 disabled:opacity-50",
 							touched.name && errors.name
-								? "border-red-500 focus:ring-red-500/20"
-								: "border-input focus:ring-ring",
+								? "border-red-700 focus:ring-red-700/20"
+								: "border-rule focus:ring-ring",
 						)}
 					/>
 					{touched.name && errors.name && (
-						<p className="text-red-500 text-xs mt-1">
+						<p className="mt-1 text-xs text-red-700">
 							{errors.name}
 						</p>
 					)}
@@ -219,14 +218,14 @@ export function ContactForm() {
 						placeholder="john@lawfirm.com"
 						disabled={status === "loading"}
 						className={cn(
-							"w-full px-4 py-3 bg-background border rounded-lg text-foreground focus:outline-none focus:ring-2 disabled:opacity-50 transition-colors",
+							"w-full rounded-sm border bg-white px-4 py-3 text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 disabled:opacity-50",
 							touched.email && errors.email
-								? "border-red-500 focus:ring-red-500/20"
-								: "border-input focus:ring-ring",
+								? "border-red-700 focus:ring-red-700/20"
+								: "border-rule focus:ring-ring",
 						)}
 					/>
 					{touched.email && errors.email && (
-						<p className="text-red-500 text-xs mt-1">
+						<p className="mt-1 text-xs text-red-700">
 							{errors.email}
 						</p>
 					)}
@@ -250,14 +249,14 @@ export function ContactForm() {
 					placeholder="Doe & Partners LLP"
 					disabled={status === "loading"}
 					className={cn(
-						"w-full px-4 py-3 bg-background border rounded-lg text-foreground focus:outline-none focus:ring-2 disabled:opacity-50 transition-colors",
+						"w-full rounded-sm border bg-white px-4 py-3 text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 disabled:opacity-50",
 						touched.firm && errors.firm
-							? "border-red-500 focus:ring-red-500/20"
-							: "border-input focus:ring-ring",
+							? "border-red-700 focus:ring-red-700/20"
+							: "border-rule focus:ring-ring",
 					)}
 				/>
 				{touched.firm && errors.firm && (
-					<p className="text-red-500 text-xs mt-1">{errors.firm}</p>
+					<p className="mt-1 text-xs text-red-700">{errors.firm}</p>
 				)}
 			</div>
 
@@ -278,14 +277,14 @@ export function ContactForm() {
 					placeholder="Tell us about your current challenges..."
 					disabled={status === "loading"}
 					className={cn(
-						"w-full px-4 py-3 bg-background border rounded-lg text-foreground focus:outline-none focus:ring-2 disabled:opacity-50 transition-colors",
+						"w-full rounded-sm border bg-white px-4 py-3 text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 disabled:opacity-50",
 						touched.message && errors.message
-							? "border-red-500 focus:ring-red-500/20"
-							: "border-input focus:ring-ring",
+							? "border-red-700 focus:ring-red-700/20"
+							: "border-rule focus:ring-ring",
 					)}
 				/>
 				{touched.message && errors.message && (
-					<p className="text-red-500 text-xs mt-1">
+					<p className="mt-1 text-xs text-red-700">
 						{errors.message}
 					</p>
 				)}
@@ -303,23 +302,19 @@ export function ContactForm() {
 			</div>
 
 			{status === "error" && (
-				<p className="text-red-500 text-sm font-medium">
+				<p className="text-sm font-medium text-red-700">
 					{errorMessage ||
 						"Something went wrong. Please try again or email us directly."}
 				</p>
 			)}
 
 			<div className="pt-4">
-				<ShimmerButton
+				<button
 					type="submit"
 					disabled={status === "loading"}
-					className="w-full disabled:opacity-70"
-					background="hsl(var(--primary))"
-					shimmerSize="0.30em"
-					shimmerColor="#0d9488"
-					shimmerDuration="2s"
+					className="w-full rounded-sm bg-ink px-5 py-3.5 transition-[background-color,transform] duration-150 ease-out hover:bg-deep active:scale-[0.99] disabled:opacity-70"
 				>
-					<span className="flex items-center justify-center gap-2 whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white lg:text-lg">
+					<span className="flex items-center justify-center gap-2 text-[15px] font-medium text-white">
 						{status === "loading" ? (
 							<>
 								<Loader2 className="w-5 h-5 animate-spin" />
@@ -329,7 +324,7 @@ export function ContactForm() {
 							"Send Message"
 						)}
 					</span>
-				</ShimmerButton>
+				</button>
 			</div>
 		</form>
 	);

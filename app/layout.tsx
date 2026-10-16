@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Libre_Caslon_Text, Public_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Navbar from "../components/ui/Navbar";
-import Footer from "../components/ui/Footer";
+import SiteHeader from "@/components/site/SiteHeader";
+import SiteFooter from "@/components/site/SiteFooter";
+import { BackToTop } from "@/components/site/BackToTop";
 import JsonLd from "../components/seo/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -13,7 +14,17 @@ import MetaPixel from "@/components/seo/MetaPixel";
 import { HashScroll } from "@/components/ui/hash-scroll";
 import { FB_PIXEL_ID } from "@/lib/fpixel";
 
-const inter = Inter({ subsets: ["latin"] });
+// Caslon for headings and the "documents"; Public Sans for everything you operate.
+const caslon = Libre_Caslon_Text({
+	subsets: ["latin"],
+	weight: ["400", "700"],
+	style: ["normal", "italic"],
+	variable: "--font-caslon",
+});
+const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public" });
+
+const SITE_DESCRIPTION =
+	"AI employees for law firms: intake, reception, drafting and follow-up. They work in your firm's tools, in a private environment, and hand off to your people.";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.praxisflow.com"),
@@ -21,14 +32,14 @@ export const metadata: Metadata = {
 		canonical: "/",
 	},
 	title: {
-		default:
-			"Secure Legal Automation & Private Infrastructure | PraxisFlow",
+		default: "AI Employees for Law Firms | PraxisFlow",
 		template: "%s | PraxisFlow",
 	},
-	description:
-		"We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
+	description: SITE_DESCRIPTION,
 	keywords: [
-		"Legal Automation",
+		"AI employees for law firms",
+		"AI agents for law firms",
+		"AI legal intake",
 		"Law Firm Automation",
 		"Legal Tech",
 		"Workflow Automation",
@@ -40,9 +51,8 @@ export const metadata: Metadata = {
 		type: "website",
 		locale: "en_US",
 		url: "https://praxisflow.com",
-		title: "PraxisFlow | Secure Legal Automation & Private Infrastructure ",
-		description:
-			"We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
+		title: "AI Employees for Law Firms | PraxisFlow",
+		description: SITE_DESCRIPTION,
 		siteName: "PraxisFlow",
 		images: [
 			{
@@ -55,9 +65,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "PraxisFlow | Secure Legal Automation & Private Infrastructure ",
-		description:
-			"We simplify complex legal operations through intelligent, custom automation — freeing attorneys to focus on billable work.",
+		title: "AI Employees for Law Firms | PraxisFlow",
+		description: SITE_DESCRIPTION,
 		images: ["/og-image.webp"],
 		creator: "@praxisflow",
 	},
@@ -99,7 +108,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" data-scroll-behavior="smooth">
 			<head>
 				{/* Meta Pixel Server Noscript Fallback Injection */}
 				<noscript>
@@ -112,7 +121,7 @@ export default function RootLayout({
 					/>
 				</noscript>
 			</head>
-			<body className={inter.className}>
+			<body className={`${caslon.variable} ${publicSans.variable} font-sans antialiased`}>
 				{/* Initializes the Meta Pixel event listeners across router shifts */}
 				{/* FIX: Wrap MetaPixel in a Suspense boundary. 
                   This catches the CSR bailout and lets the static 404 page compile perfectly.
@@ -123,11 +132,12 @@ export default function RootLayout({
 
 				<JsonLd />
 				<HashScroll />
-				<Navbar />
-				<main className="min-h-screen flex flex-col items-center justify-between">
+				<SiteHeader />
+				<main>
 					{children}
 				</main>
-				<Footer />
+				<SiteFooter />
+				<BackToTop />
 				<Analytics />
 				<SpeedInsights />
 

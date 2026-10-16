@@ -89,7 +89,7 @@ export default function BlogFilters({
 	}
 
 	const chipBase =
-		"inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium transition-colors";
+		"inline-flex items-center rounded-sm border px-3.5 py-1.5 text-sm font-medium transition-colors duration-150";
 
 	return (
 		<motion.div
@@ -104,7 +104,7 @@ export default function BlogFilters({
 			{/* Search */}
 			<motion.div
 				variants={itemVariants}
-				className="relative max-w-md mx-auto w-full"
+				className="relative w-full max-w-md"
 			>
 				<Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
 				<input
@@ -113,7 +113,7 @@ export default function BlogFilters({
 					onChange={(e) => setQuery(e.target.value)}
 					placeholder="Search posts..."
 					aria-label="Search blog posts"
-					className="w-full rounded-full border border-border bg-card pl-10 pr-10 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-shadow focus:shadow-lg focus:shadow-accent/10"
+					className="w-full rounded-sm border border-rule bg-white py-2.5 pl-10 pr-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent"
 				/>
 				{query && (
 					<button
@@ -131,19 +131,17 @@ export default function BlogFilters({
 			{categories.length > 0 && (
 				<motion.div
 					variants={pillsContainerVariants}
-					className="flex flex-wrap items-center justify-center gap-2"
+					className="flex flex-wrap items-center gap-2"
 				>
 					<motion.button
 						type="button"
 						variants={itemVariants}
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
 						onClick={() => selectCategory(null)}
 						className={cn(
 							chipBase,
 							!activeCategory
-								? "border-accent bg-accent/10 text-accent"
-								: "border-border text-muted-foreground hover:border-accent/40 hover:text-accent",
+								? "border-ink bg-ink text-white"
+								: "border-rule bg-white text-muted-foreground hover:border-ink hover:text-ink",
 						)}
 					>
 						All
@@ -155,14 +153,12 @@ export default function BlogFilters({
 								key={category.slug}
 								type="button"
 								variants={itemVariants}
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
 								onClick={() => selectCategory(category.slug)}
 								className={cn(
 									chipBase,
 									isActive
-										? "border-accent bg-accent/10 text-accent"
-										: "border-border text-muted-foreground hover:border-accent/40 hover:text-accent",
+										? "border-ink bg-ink text-white"
+										: "border-rule bg-white text-muted-foreground hover:border-ink hover:text-ink",
 								)}
 							>
 								{category.name}

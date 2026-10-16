@@ -1,7 +1,6 @@
 import React from "react";
-import { FadeIn } from "@/components/ui/fade-in";
-import { DotPattern } from "@/components/ui/dot-pattern";
-import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/site/Reveal";
+import { PageHero } from "@/components/site/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,44 +18,14 @@ export default function PrivacyPolicyPage() {
 	const lastUpdated = "November 22, 2025";
 
 	return (
-		<div className="w-full min-h-screen bg-background">
-			<main className="relative pt-32 pb-20 px-6 overflow-hidden">
-				{/* Background Elements */}
-				<div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-					<DotPattern
-						width={20}
-						height={20}
-						cx={1}
-						cy={1}
-						cr={1}
-						className={cn(
-							"[mask-image:radial-gradient(800px_circle_at_top,white,transparent)]",
-							"text-accent/10",
-						)}
-					/>
-					<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]"></div>
-				</div>
-
-				<div className="container mx-auto max-w-4xl">
-					<FadeIn>
-						<div className="text-center mb-16">
-							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-8">
-								<span className="flex h-2 w-2 rounded-full bg-accent"></span>
-								Legal
-							</div>
-							<h1 className="text-4xl md:text-5xl font-medium text-foreground mb-6 tracking-tight">
-								Privacy Policy
-							</h1>
-							<p className="text-muted-foreground">
-								Last updated: {lastUpdated}
-							</p>
-						</div>
-					</FadeIn>
-
-					<FadeIn delay={0.1}>
-						<div className="space-y-12 p-8 md:p-12 rounded-2xl">
+		<div className="w-full bg-white">
+			<PageHero eyebrow={`Legal · Last updated ${lastUpdated}`} title="Privacy Policy" />
+			<main className="px-4 pb-24 pt-16 sm:px-6">
+				<div className="mx-auto max-w-3xl">
+					<Reveal delay={0.1}>
+						<div className="space-y-12">
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									1. Introduction
 								</h2>
 								<p className="text-muted-foreground leading-relaxed mb-4">
@@ -71,7 +40,7 @@ export default function PrivacyPolicyPage() {
 							</section>
 
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									2. Information We Collect
 								</h2>
 								<p className="text-muted-foreground leading-relaxed mb-4">
@@ -79,7 +48,7 @@ export default function PrivacyPolicyPage() {
 								</p>
 								<ul className="space-y-3 text-muted-foreground">
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -93,7 +62,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -107,7 +76,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -124,7 +93,7 @@ export default function PrivacyPolicyPage() {
 							</section>
 
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									3. How We Use Your Information
 								</h2>
 								<p className="text-muted-foreground leading-relaxed mb-4">
@@ -132,7 +101,7 @@ export default function PrivacyPolicyPage() {
 								</p>
 								<ul className="space-y-3 text-muted-foreground">
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -141,7 +110,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -150,7 +119,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -159,7 +128,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -179,7 +148,7 @@ export default function PrivacyPolicyPage() {
 							</section>
 
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									4. Data Security
 								</h2>
 								<p className="text-muted-foreground leading-relaxed">
@@ -193,7 +162,7 @@ export default function PrivacyPolicyPage() {
 							</section>
 
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									5. Your Rights
 								</h2>
 								<p className="text-muted-foreground leading-relaxed mb-4">
@@ -202,7 +171,7 @@ export default function PrivacyPolicyPage() {
 								</p>
 								<ul className="space-y-3 text-muted-foreground">
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -210,13 +179,13 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>Correct inaccurate data</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -224,7 +193,7 @@ export default function PrivacyPolicyPage() {
 										</span>
 									</li>
 									<li className="flex gap-3">
-										<span className="text-accent font-bold">
+										<span className="font-bold text-accent-ink">
 											•
 										</span>
 										<span>
@@ -235,7 +204,7 @@ export default function PrivacyPolicyPage() {
 							</section>
 
 							<section className="mb-12">
-								<h2 className="text-2xl font-medium text-foreground mb-4">
+								<h2 className="mb-4 font-serif text-[clamp(1.5rem,2.4vw,1.9rem)] leading-tight text-ink">
 									6. Contact Us
 								</h2>
 								<p className="text-muted-foreground leading-relaxed">
@@ -243,7 +212,7 @@ export default function PrivacyPolicyPage() {
 									Policy, please contact us at{" "}
 									<a
 										href="mailto:privacy@praxisflow.com"
-										className="text-accent hover:text-accent/80 font-medium"
+										className="text-accent-ink hover:text-accent-ink/80 font-medium"
 									>
 										privacy@praxisflow.com
 									</a>
@@ -251,7 +220,7 @@ export default function PrivacyPolicyPage() {
 								</p>
 							</section>
 						</div>
-					</FadeIn>
+					</Reveal>
 				</div>
 			</main>
 		</div>

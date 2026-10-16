@@ -26,6 +26,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			priority: 0.9,
 		},
 		{
+			url: `${baseUrl}/ai-agents-for-law-firms`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.9,
+		},
+		{
+			url: `${baseUrl}/law-firm-intake-automation`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.9,
+		},
+		{
+			url: `${baseUrl}/ai-client-onboarding-for-law-firms`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.9,
+		},
+		{
+			url: `${baseUrl}/ai-receptionist-for-law-firms`,
+			lastModified: new Date(),
+			changeFrequency: "monthly",
+			priority: 0.9,
+		},
+		{
 			url: `${baseUrl}/law-firm-automation`,
 			lastModified: new Date(),
 			changeFrequency: "monthly",

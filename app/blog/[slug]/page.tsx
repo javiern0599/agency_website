@@ -1,8 +1,7 @@
 import { fetchAPI } from "@/lib/strapi";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import { notFound } from "next/navigation";
-import { FadeIn } from "@/components/ui/fade-in";
-import { DotPattern } from "@/components/ui/dot-pattern";
+import { Reveal } from "@/components/site/Reveal";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -116,25 +115,25 @@ export default async function SinglePostPage({
 	}
 
 	return (
-		<div className="w-full min-h-screen bg-background">
+		<div className="w-full bg-white">
 			{/* Back to Blog Link */}
-			<section className="pt-32 px-6">
-				<div className="max-w-4xl mx-auto">
+			<section className="px-4 pt-10 sm:px-6">
+				<div className="mx-auto max-w-3xl">
 					<Link
 						href="/blog"
-						className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors group"
+						className="group inline-flex items-center gap-2 text-[14px] text-muted-foreground transition-colors duration-200 hover:text-ink"
 					>
-						<ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+						<ArrowLeft className="h-4 w-4 transition-transform duration-200 ease-out group-hover:-translate-x-1" strokeWidth={1.75} />
 						Back to Blog
 					</Link>
 				</div>
 			</section>
 
 			{/* Article */}
-			<article className="max-w-4xl mx-auto pt-10 px-6">
-				<FadeIn>
-					<header className="mb-8">
-						<h1 className="text-3xl md:text-5xl font-medium text-foreground tracking-tight mb-4">
+			<article className="mx-auto max-w-3xl px-4 pb-10 pt-10 sm:px-6">
+				<Reveal>
+					<header className="mb-10 border-b border-rule pb-8">
+						<h1 className="mb-5 font-serif text-[clamp(2.2rem,5vw,3.5rem)] leading-[1.08] tracking-[-0.015em] text-ink [text-wrap:balance]">
 							{post.title}
 						</h1>
 						<div className="flex items-center gap-4 text-muted-foreground text-sm">
@@ -145,7 +144,7 @@ export default async function SinglePostPage({
 								<span>
 									{new Date(
 										post.publishDate,
-									).toLocaleDateString()}
+									).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
 								</span>
 							)}
 						</div>
@@ -156,19 +155,19 @@ export default async function SinglePostPage({
 							<img
 								src={post.coverImage.url}
 								alt={post.title}
-								className="w-full h-64 md:h-96 object-cover rounded-lg"
+								className="aspect-[16/9] w-full object-cover"
 							/>
 						</div>
 					)}
 
 					{/* Content */}
-					<div className="prose prose-lg max-w-none prose-headings:text-foreground prose-headings:mt-8 prose-headings:mb-4 prose-p:text-foreground prose-p:my-4 prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-blockquote:border-accent prose-code:text-accent prose-pre:bg-muted prose-ul:mt-4">
+					<div className="prose prose-lg max-w-none prose-headings:mb-4 prose-headings:mt-10 prose-headings:font-serif prose-headings:font-normal prose-headings:text-ink prose-p:my-4 prose-p:text-foreground prose-a:text-ink prose-a:decoration-accent prose-a:underline-offset-4 prose-blockquote:border-accent prose-blockquote:font-serif prose-strong:text-foreground prose-code:text-accent-ink prose-pre:bg-muted prose-ul:mt-4">
 						<BlocksRenderer content={post.content} />
 					</div>
-				</FadeIn>
+				</Reveal>
 			</article>
 
-			<section className="max-w-4xl mx-auto py-6 px-6">
+			<section className="mx-auto max-w-3xl px-4 pb-20 pt-6 sm:px-6">
 				<CommentsSection documentId={post.documentId} />
 			</section>
 		</div>

@@ -4,8 +4,10 @@ export const metadata: Metadata = {
 	alternates: { canonical: "/pricing" },
 	title: "Pricing",
 	description:
-		"Transparent, value-based investment for legal automation. No hourly billing, no surprises. Just clear ROI and a partnership built on trust.",
+		"AI employees for law firms from $2,500 setup and $500 a month per role, or custom automation from $2,000 per project. Fixed quotes, no hourly billing, no long-term contract.",
 	keywords: [
+		"AI employees for law firms pricing",
+		"AI receptionist for law firms cost",
 		"Legal Automation Pricing",
 		"Law Firm Automation Cost",
 		"Legal Tech Pricing",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Pricing | PraxisFlow",
 		description:
-			"Transparent, value-based investment for legal automation. No hourly billing, no surprises. Just clear ROI and a partnership built on trust.",
+			"AI employees for law firms from $2,500 setup and $500 a month per role, or custom automation from $2,000 per project. Fixed quotes, no hourly billing, no long-term contract.",
 		url: "https://www.praxisflow.com/pricing",
 		type: "website",
 		images: [
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Pricing | PraxisFlow",
 		description:
-			"Transparent, value-based investment for legal automation. No hourly billing, no surprises.",
+			"AI employees from $2,500 setup and $500 a month per role. Custom automation from $2,000. Fixed quotes, no long-term contract.",
 		images: ["/og-image.webp"],
 	},
 };
