@@ -1,11 +1,10 @@
 import { fetchAPI } from "@/lib/strapi";
 import Link from "next/link";
-import { FadeIn } from "@/components/ui/fade-in";
-import { DotPattern } from "@/components/ui/dot-pattern";
+import { Reveal } from "@/components/site/Reveal";
+import { PageHero, wrap } from "@/components/site/ui";
 import { BlogPagination } from "@/components/ui/blog-pagination";
 import BlogFilters from "@/components/sections/BlogFilters";
 import { getBlogCategories } from "@/lib/blog-categories";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
 const PAGE_SIZE = 6;
@@ -110,46 +109,16 @@ export default async function BlogPage({
 	const resultsKey = `${activeCategory?.slug ?? "all"}:${searchQuery ?? ""}:${currentPage}`;
 
 	return (
-		<div className="w-full min-h-screen bg-background">
-			{/* Hero Section */}
-			<section className="relative pt-32 pb-20 px-6 overflow-hidden">
-				{/* DotPattern Background */}
-				<DotPattern
-					width={20}
-					height={20}
-					cx={1}
-					cy={1}
-					cr={1}
-					className={cn(
-						"[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-						"text-accent/10",
-					)}
-				/>
-
-				{/* Decorative blur effects */}
-				<div className="absolute top-20 right-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-				<div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-
-				<div className="max-w-5xl mx-auto text-center relative z-10">
-					<FadeIn>
-						<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-8">
-							<span className="flex h-2 w-2 rounded-full bg-accent"></span>
-							Blog
-						</div>
-						<h1 className="text-4xl md:text-6xl font-medium text-foreground tracking-tight mb-6">
-							PraxisFlow <span className="text-accent">Blog</span>
-						</h1>
-						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							Insights, updates, and thoughts on legal automation
-							and technology.
-						</p>
-					</FadeIn>
-				</div>
-			</section>
+		<div className="w-full bg-white">
+			<PageHero
+				eyebrow="Blog"
+				title="Notes on AI and automation for law firms."
+				lede="Insights, updates, and thoughts on legal automation and technology."
+			/>
 
 			{/* Blog Posts Grid */}
-			<section className="pb-20 px-6 pt-10">
-				<div className="max-w-6xl mx-auto">
+			<section className="pb-24 pt-14">
+				<div className={wrap}>
 					<BlogFilters
 						categories={categories}
 						activeCategory={activeCategory?.slug}
@@ -159,10 +128,10 @@ export default async function BlogPage({
 					{Array.isArray(posts) && posts.length > 0 ? (
 						<div
 							key={resultsKey}
-							className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+							className="grid grid-cols-1 border-l border-t border-rule [&>*]:border-b [&>*]:border-r [&>*]:border-rule md:grid-cols-2 lg:grid-cols-3"
 						>
 							{posts.map((post: any, idx: number) => (
-								<FadeIn
+								<Reveal
 									delay={0.1 + idx * 0.05}
 									key={post.documentId}
 									className="h-full"
@@ -171,16 +140,17 @@ export default async function BlogPage({
 										href={`/blog/${post.slug}`}
 										className="block h-full"
 									>
-										<div className="group flex flex-col h-full border border-border rounded-lg p-6 hover:shadow-lg hover:border-accent/20 transition-all duration-300 bg-card">
+										<div className="group relative flex h-full flex-col bg-white p-6 transition-colors duration-200 hover:bg-slate-50">
+											<span aria-hidden className="absolute inset-x-0 bottom-0 h-1 origin-left will-change-transform scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
 											{post.coverImage && (
 												<img
 													src={post.coverImage.url}
 													alt={post.title}
-													className="w-full h-48 object-cover rounded-md mb-4  transition-transform duration-300"
+													className="mb-5 aspect-[16/10] w-full object-cover"
 												/>
 											)}
 
-											<h2 className="text-xl font-semibold text-foreground mb-4 group-hover:text-accent transition-colors line-clamp-2">
+											<h2 className="mb-5 line-clamp-3 font-serif text-[22px] leading-snug text-ink">
 												{post.title}
 											</h2>
 
@@ -194,18 +164,18 @@ export default async function BlogPage({
 													<p className="text-muted-foreground text-xs mt-1">
 														{new Date(
 															post.publishDate,
-														).toLocaleDateString()}
+														).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
 													</p>
 												)}
 											</div>
 										</div>
 									</Link>
-								</FadeIn>
+								</Reveal>
 							))}
 						</div>
 					) : isFiltering && !fetchFailed ? (
-						<div className="rounded-lg border border-border bg-card p-8 text-center">
-							<h2 className="text-2xl font-semibold text-foreground mb-2">
+						<div className="border-t border-ink py-10">
+							<h2 className="mb-2 font-serif text-[26px] text-ink">
 								No matching posts
 							</h2>
 							<p className="text-muted-foreground mb-4">
@@ -214,14 +184,14 @@ export default async function BlogPage({
 							</p>
 							<Link
 								href="/blog"
-								className="inline-flex items-center text-accent hover:underline text-sm font-medium"
+								className="inline-flex items-center text-sm font-medium text-ink underline decoration-accent underline-offset-4"
 							>
 								Clear filters
 							</Link>
 						</div>
 					) : (
-						<div className="rounded-lg border border-border bg-card p-8 text-center">
-							<h2 className="text-2xl font-semibold text-foreground mb-2">
+						<div className="border-t border-ink py-10">
+							<h2 className="mb-2 font-serif text-[26px] text-ink">
 								No posts available
 							</h2>
 							<p className="text-muted-foreground">

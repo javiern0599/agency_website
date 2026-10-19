@@ -53,12 +53,12 @@ export function BlogPagination({
 	const pageItems = getPageItems(currentPage, pageCount);
 
 	const baseControl =
-		"inline-flex items-center justify-center h-10 min-w-10 px-3 rounded-md border text-sm font-medium transition-colors";
+		"inline-flex items-center justify-center h-10 min-w-10 px-3 rounded-sm border text-sm font-medium tabular-nums transition-colors duration-150";
 
 	return (
 		<nav
 			aria-label="Blog pagination"
-			className="mt-16 flex items-center justify-center gap-2"
+			className="mt-16 flex flex-wrap items-center gap-2"
 		>
 			{hasPrev ? (
 				<Link
@@ -67,7 +67,7 @@ export function BlogPagination({
 					aria-label="Previous page"
 					className={cn(
 						baseControl,
-						"border-border text-foreground hover:border-accent/40 hover:text-accent",
+						"border-rule bg-white text-ink hover:border-ink",
 					)}
 				>
 					<ChevronLeft className="w-4 h-4" />
@@ -77,7 +77,7 @@ export function BlogPagination({
 					aria-hidden="true"
 					className={cn(
 						baseControl,
-						"border-border text-muted-foreground/40 cursor-not-allowed",
+						"cursor-not-allowed border-rule text-muted-foreground/40",
 					)}
 				>
 					<ChevronLeft className="w-4 h-4" />
@@ -98,7 +98,7 @@ export function BlogPagination({
 						aria-current="page"
 						className={cn(
 							baseControl,
-							"border-accent bg-accent/10 text-accent",
+							"border-ink bg-ink text-white",
 						)}
 					>
 						{item}
@@ -110,7 +110,7 @@ export function BlogPagination({
 						aria-label={`Go to page ${item}`}
 						className={cn(
 							baseControl,
-							"border-border text-foreground hover:border-accent/40 hover:text-accent",
+							"border-rule bg-white text-ink hover:border-ink",
 						)}
 					>
 						{item}
@@ -125,7 +125,7 @@ export function BlogPagination({
 					aria-label="Next page"
 					className={cn(
 						baseControl,
-						"border-border text-foreground hover:border-accent/40 hover:text-accent",
+						"border-rule bg-white text-ink hover:border-ink",
 					)}
 				>
 					<ChevronRight className="w-4 h-4" />
@@ -135,7 +135,7 @@ export function BlogPagination({
 					aria-hidden="true"
 					className={cn(
 						baseControl,
-						"border-border text-muted-foreground/40 cursor-not-allowed",
+						"cursor-not-allowed border-rule text-muted-foreground/40",
 					)}
 				>
 					<ChevronRight className="w-4 h-4" />

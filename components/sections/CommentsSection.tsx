@@ -149,7 +149,7 @@ function CommentItem({
 						<button
 							type="button"
 							onClick={() => setReplyOpen((s) => !s)}
-							className="text-xs text-accent hover:underline"
+							className="text-xs text-accent-ink hover:underline"
 						>
 							Reply
 						</button>

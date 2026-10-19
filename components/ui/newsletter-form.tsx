@@ -55,7 +55,7 @@ export function NewsletterForm() {
 		<div>
 			<form
 				onSubmit={handleSubmit}
-				className="flex flex-col lg:flex-row gap-2 w-full lg:gap-3"
+				className="flex w-full flex-col gap-2 sm:flex-row"
 			>
 				{/* Honeypot (hidden from users, visible in DOM for bots) */}
 				<div
@@ -85,17 +85,17 @@ export function NewsletterForm() {
 					placeholder="Your email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					className="border border-border rounded-md px-3 py-2 w-full text-sm bg-transparent text-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+					className="w-full rounded-sm border border-rule bg-white px-3 py-2.5 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent"
 					aria-label="Email address"
 				/>
 				<button
 					type="submit"
-					className="bg-accent text-white rounded-md px-4 py-2 text-sm hover:bg-accent/90 transition-colors shadow-sm disabled:bg-accent/70 disabled:cursor-not-allowed"
+					className="grid place-items-center rounded-sm bg-ink px-4 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-deep disabled:cursor-not-allowed disabled:opacity-70"
 					disabled={status === "loading"}
 				>
 					{status === "loading" ? (
 						<>
-							<Loader2 className="w-5 h-5 animate-spin" />
+							<Loader2 className="h-5 w-5 animate-spin" aria-label="Subscribing" />
 						</>
 					) : (
 						"Subscribe"
@@ -105,16 +105,13 @@ export function NewsletterForm() {
 
 			{message && (
 				<p
-					className={`mt-3 text-sm ${status === "error" ? "text-red-500" : "text-green-600"}`}
+					className={`mt-3 text-sm ${status === "error" ? "text-red-700" : "text-accent-ink"}`}
 				>
 					{message}
 				</p>
 			)}
 
-			<p className="text-xs text-muted-foreground mt-4 md:max-w-xs">
-				Get the latest insights and workflow automation updates.
-				Unsubscribe at any time.
-			</p>
+			<p className="mt-3 text-xs text-muted-foreground">Unsubscribe at any time.</p>
 		</div>
 	);
 }

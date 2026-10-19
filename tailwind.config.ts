@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
 	darkMode: ["class"],
+	// Touch devices fire hover on tap; only apply hover styles where hover exists.
+	future: { hoverOnlyWhenSupported: true },
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +11,21 @@ const config: Config = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ["var(--font-public)", "ui-sans-serif", "system-ui", "sans-serif"],
+				serif: ["var(--font-caslon)", "ui-serif", "Georgia", "serif"],
+			},
+			transitionTimingFunction: {
+				out: "cubic-bezier(0.23, 1, 0.32, 1)",
+				"in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
+				drawer: "cubic-bezier(0.32, 0.72, 0, 1)",
+			},
 			colors: {
+				ink: "hsl(var(--ink))",
+				desk: "hsl(var(--desk))",
+				rule: "hsl(var(--rule))",
+				"accent-ink": "hsl(var(--accent-ink))",
+				deep: "hsl(var(--deep))",
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				primary: {

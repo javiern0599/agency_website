@@ -1,27 +1,13 @@
 import type { Metadata } from "next";
+import { RelatedReading, posts } from "@/components/site/RelatedReading";
 import Link from "next/link";
-import {
-	ArrowRight,
-	Users,
-	FileText,
-	Receipt,
-	MessageSquare,
-	Megaphone,
-	BarChart3,
-	Lock,
-	Plug,
-	Settings,
-	Search,
-	Wrench,
-	Rocket,
-} from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
-import { DotPattern } from "@/components/ui/dot-pattern";
-import { cn } from "@/lib/utils";
-import LegalAutomationHero from "@/components/sections/LawFirmAutomationHero";
-import LegalAutomationFAQ from "@/components/sections/LawFirmAutomationFAQ";
-import { AnimatedConnectingLine } from "@/components/ui/animated-connecting-line";
+import { HiringSteps } from "@/components/site/HiringSteps";
+import { FaqList } from "@/components/site/Faq";
+import { CloseCta } from "@/components/site/Blocks";
+import { Reveal } from "@/components/site/Reveal";
+import { Monogram } from "@/components/site/EngagementSheet";
+import { ArrowButton, ArticleHeading, JsonLdScript, PageHero, TextLink, faqJsonLd, wrap } from "@/components/site/ui";
+import { CALENDAR_URL, pricing, roles, type Faq } from "@/lib/site-content";
 
 // --- On-page SEO -----------------------------------------------------------
 // Primary keyword: "law firm automation" (report's top low-difficulty service
@@ -64,74 +50,41 @@ export const metadata: Metadata = {
 	},
 };
 
-const CALENDAR_URL = "https://calendar.app.google/AtTiu5d3kd2EwumQ8";
-
 const automations = [
 	{
-		icon: Users,
 		title: "Client Intake",
 		description:
 			"Capture, qualify, and route new leads the moment they arrive — no manual data entry, no missed inquiries.",
 	},
 	{
-		icon: FileText,
 		title: "Document Generation",
 		description:
 			"Auto-draft engagement letters, agreements, and filings from your templates and matter data.",
 	},
 	{
-		icon: Receipt,
 		title: "Billing & Invoicing",
 		description:
 			"Turn tracked time into accurate invoices and payment reminders without the month-end scramble.",
 	},
 	{
-		icon: MessageSquare,
 		title: "Client Communication",
 		description:
 			"Send timely updates, reminders, and follow-ups automatically so nothing slips through the cracks.",
 	},
 	{
-		icon: Megaphone,
 		title: "Marketing & Follow-up",
 		description:
 			"Nurture prospects and past clients with sequences that run on their own, tied to your CRM.",
 	},
 	{
-		icon: BarChart3,
 		title: "Reporting",
 		description:
 			"Pull matter, revenue, and pipeline data into clean dashboards updated without spreadsheets.",
 	},
 ];
 
-const steps = [
-	{
-		number: "01",
-		icon: Search,
-		title: "Map your workflow",
-		description:
-			"We start with a free discovery call to find where your firm loses the most time to manual work.",
-	},
-	{
-		number: "02",
-		icon: Wrench,
-		title: "Build & connect",
-		description:
-			"We build custom automations and connect them to the tools you already use — no rip-and-replace.",
-	},
-	{
-		number: "03",
-		icon: Rocket,
-		title: "Launch & support",
-		description:
-			"Your automations go live in a private environment, monitored and supported so they keep running.",
-	},
-];
-
 const differentiators = [
 	{
-		icon: Lock,
 		title: "Private & confidential",
 		description:
 			"Every firm runs in its own isolated environment — client data never mingles with other firms'.",
@@ -139,7 +92,6 @@ const differentiators = [
 		linkLabel: "See how we protect your data",
 	},
 	{
-		icon: Plug,
 		title: "Works with your stack",
 		description:
 			"We connect to Clio, DocuSign, Airtable, Outlook, and 1,000+ other tools your firm already relies on.",
@@ -147,7 +99,6 @@ const differentiators = [
 		linkLabel: "Explore integrations",
 	},
 	{
-		icon: Settings,
 		title: "Tailored to your firm",
 		description:
 			"No off-the-shelf software. Automations are built around how your practice actually operates.",
@@ -156,7 +107,31 @@ const differentiators = [
 	},
 ];
 
-const faqs = [
+const steps = [
+	{
+		title: "Map your workflow",
+		body: "We start with a free discovery call to find where your firm loses the most time to manual work.",
+	},
+	{
+		title: "Build & connect",
+		body: "We build custom automations and connect them to the tools you already use — no rip-and-replace.",
+	},
+	{
+		title: "Launch & support",
+		body: "Your automations go live in a private environment, monitored and supported so they keep running.",
+	},
+];
+
+const stack = [
+	{ name: "Clio", logo: "/Vector.svg" },
+	{ name: "DocuSign", logo: "/docusign-icon.png" },
+	{ name: "Microsoft Outlook", logo: "/microsoft-outlook.svg" },
+	{ name: "Slack", logo: "/slack-integration.svg" },
+	{ name: "Airtable", logo: "/airtable.svg" },
+	{ name: "Google Workspace", logo: "/google-workspace-integration.svg" },
+];
+
+const faqs: Faq[] = [
 	{
 		question: "What is law firm automation?",
 		answer: "Law firm automation (also called legal automation) is the use of software to handle repetitive, rules-based tasks in a law firm — such as client intake, document generation, billing, and follow-up — so your team spends less time on admin and more time on billable work.",
@@ -175,281 +150,149 @@ const faqs = [
 	},
 	{
 		question: "How much does law firm automation cost?",
-		answer: "We use transparent, fixed pricing — you pay once to build your automations, and ongoing support is optional. There is no hourly billing and no long-term contract required. See our pricing page for details.",
+		answer: `We use transparent, fixed pricing — projects start at ${pricing.automation.build}, you pay once to build your automations, and ongoing support is optional from ${pricing.automation.support} a month. There is no hourly billing and no long-term contract required. See our pricing page for details.`,
 		linkText: "pricing page",
 		linkHref: "/pricing",
 	},
 ];
 
-// FAQPage structured data — makes the Q&A eligible for rich results in Google.
-const faqJsonLd = {
-	"@context": "https://schema.org",
-	"@type": "FAQPage",
-	mainEntity: faqs.map((f) => ({
-		"@type": "Question",
-		name: f.question,
-		acceptedAnswer: {
-			"@type": "Answer",
-			text: f.answer,
-		},
-	})),
-};
+function StackLedger() {
+	return (
+		<div className="bg-white px-7 py-8 shadow-[0_1px_2px_rgba(15,23,42,0.06),0_24px_48px_-24px_rgba(15,23,42,0.25)] sm:px-9">
+			<p className="text-[12px] font-medium uppercase tracking-[0.16em] text-muted-foreground">Your firm, connected</p>
+			<ul className="mt-5 border-t border-ink">
+				{stack.map((t, i) => (
+					<Reveal as="li" key={t.name} delay={0.1 + i * 0.06} className="flex items-center gap-4 border-b border-rule py-3.5">
+						<span className="grid h-9 w-9 shrink-0 place-items-center">
+							<img src={t.logo} alt="" width={26} height={26} className="h-[26px] w-[26px] object-contain" />
+						</span>
+						<span className="font-serif text-[18px] text-ink">{t.name}</span>
+					</Reveal>
+				))}
+			</ul>
+			<p className="mt-4 text-[13px] text-muted-foreground">And the rest of your stack, through its API.</p>
+		</div>
+	);
+}
 
 export default function LegalAutomationPage() {
 	return (
-		<div className="w-full bg-background">
-			{/* FAQ structured data */}
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-			/>
+		<div className="w-full">
+			<JsonLdScript data={faqJsonLd(faqs)} />
+			<PageHero
+				eyebrow="Done-for-you automation"
+				title="Law Firm Automation"
+				lede="We build custom law firm automation that connects the tools your firm already uses — so intake, billing, documents, and follow-up run themselves. More billable hours, fewer errors, no new headcount."
+				aside={<StackLedger />}
+			>
+				<ArrowButton href={CALENDAR_URL}>Book a free discovery call</ArrowButton>
+				<ArrowButton href="#what" variant="plain">
+					What you can automate
+				</ArrowButton>
+			</PageHero>
 
-			{/* Hero — split layout with animated "connect your stack" diagram */}
-			<LegalAutomationHero />
-
-			{/* Intro / keyword-rich context */}
-			<section className="px-6 max-w-3xl mx-auto py-12">
-				<FadeIn>
-					<p className="text-lg text-muted-foreground leading-relaxed text-center">
-						Law firms lose countless hours every week to manual,
-						repetitive tasks. Legal workflow automation removes that
-						drag by handling the busywork automatically — accurately
-						and around the clock. Instead of forcing your team onto
-						new software, we automate the work that happens between
-						the tools you already trust, tailored to how your
-						practice runs.
+			<section className="bg-white py-20 sm:py-24">
+				<div className={wrap}>
+					<p className="max-w-[62ch] font-serif text-[clamp(1.35rem,2.2vw,1.65rem)] leading-[1.5] text-ink">
+						Law firms lose countless hours every week to manual, repetitive tasks. Legal workflow automation removes that
+						drag by handling the busywork automatically — accurately and around the clock. Instead of forcing your team
+						onto new software, we automate the work that happens between the tools you already trust, tailored to how
+						your practice runs.
 					</p>
-				</FadeIn>
+				</div>
 			</section>
 
-			{/* What you can automate */}
-			<section className="px-6 py-20 bg-secondary/40">
-				<div className="max-w-7xl mx-auto">
-					<FadeIn>
-						<div className="text-center mb-14">
-							<h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-4">
-								What you can automate
-							</h2>
-							<p className="text-muted-foreground max-w-2xl mx-auto">
-								From the first client touch to the final
-								invoice, here's where firms reclaim the most
-								time.
-							</p>
-						</div>
-					</FadeIn>
+			<section id="what" className="border-t border-rule bg-desk py-24 sm:py-28">
+				<div className={wrap}>
+					<ArticleHeading>What you can automate</ArticleHeading>
+					<p className="mt-5 max-w-[56ch] text-[18px] leading-relaxed text-muted-foreground">
+						From the first client touch to the final invoice, here&apos;s where firms reclaim the most time.
+					</p>
+					<ul className="mt-14 grid border-l border-t border-rule [&>*]:border-b [&>*]:border-r [&>*]:border-rule sm:grid-cols-2 lg:grid-cols-3">
+						{automations.map((a, i) => (
+							<Reveal as="li" key={a.title} delay={(i % 3) * 0.05} className="bg-white p-7 sm:p-8">
+								<h3 className="font-serif text-[23px] text-ink">{a.title}</h3>
+								<p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{a.description}</p>
+							</Reveal>
+						))}
+					</ul>
+				</div>
+			</section>
 
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-						{automations.map((item, index) => {
-							const Icon = item.icon;
-							return (
-								<FadeIn key={item.title} delay={index * 0.05}>
-									<div className="group relative bg-card border border-border p-8 rounded-2xl h-full overflow-hidden hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-300">
-										<div className="absolute top-0 right-0 p-6 opacity-[0.04] group-hover:opacity-[0.09] transition-opacity">
-											<Icon className="w-24 h-24 text-accent" />
-										</div>
-										<div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 text-accent">
-											<Icon className="w-6 h-6" />
-										</div>
-										<h3 className="text-lg font-medium text-foreground mb-2 relative z-10">
-											{item.title}
-										</h3>
-										<p className="text-muted-foreground leading-relaxed relative z-10">
-											{item.description}
-										</p>
-									</div>
-								</FadeIn>
-							);
-						})}
+			<section className="border-t border-rule bg-white py-24 sm:py-28">
+				<div className={`${wrap} grid gap-12 lg:grid-cols-12`}>
+					<div className="lg:col-span-5">
+						<ArticleHeading>Or engage an AI employee</ArticleHeading>
+						<p className="mt-5 max-w-[44ch] text-[18px] leading-relaxed text-muted-foreground">
+							Some of this work is a whole role. Our AI employees take it on with written duties, written limits and a
+							hand-off to your people.
+						</p>
+						<TextLink href="/ai-agents-for-law-firms" className="mt-8">
+							Meet the staff
+						</TextLink>
 					</div>
-				</div>
-			</section>
-
-			{/* How it works — dark centerpiece (this is a real sequence) */}
-			<section className="relative py-28 px-6 bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white overflow-hidden">
-				<div className="absolute inset-0 opacity-30 pointer-events-none">
-					<div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-teal-500/30 rounded-full blur-[150px]"></div>
-					<div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[150px]"></div>
-				</div>
-
-				<div className="max-w-6xl mx-auto relative z-10">
-					<FadeIn>
-						<div className="text-center mb-16">
-							<h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-4 text-white">
-								How law firm automation works with PraxisFlow
-							</h2>
-							<p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
-								Three steps from your first call to automations
-								running quietly in the background.
-							</p>
-						</div>
-					</FadeIn>
-
-					<div className="relative">
-						{/* Horizontal connector (tablet + desktop, 3-col) — draws in from the left */}
-						<AnimatedConnectingLine
-							className="hidden md:block absolute top-[68px] left-[16%] right-[16%] h-[2px] origin-left"
-							style={{
-								background:
-									"linear-gradient(to right, rgba(20,184,166,0.5) 0%, rgba(59,130,246,0.5) 50%, rgba(20,184,166,0.5) 100%)",
-							}}
-						/>
-
-						<div className="grid md:grid-cols-3 gap-8">
-							{steps.map((step, index) => {
-								const Icon = step.icon;
-								const isLast = index === steps.length - 1;
-								return (
-									<FadeIn
-										key={step.number}
-										delay={index * 0.1}
-										className="relative"
-									>
-										<div className="group relative bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 p-8 rounded-2xl hover:border-teal-500/50 hover:shadow-2xl hover:shadow-teal-500/10 transition-all duration-300 h-full overflow-hidden">
-											<div className="absolute top-4 right-6 text-6xl font-semibold text-white/[0.05] group-hover:text-white/[0.08] transition-colors select-none">
-												{step.number}
-											</div>
-											<div className="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center mb-6 text-teal-400 relative z-10">
-												<Icon className="w-6 h-6" />
-											</div>
-											<h3 className="text-xl font-semibold mb-3 text-white relative z-10">
-												{step.title}
-											</h3>
-											<p className="text-sm text-slate-400 leading-relaxed relative z-10">
-												{step.description}
-											</p>
-										</div>
-
-										{/* Vertical connector between stacked cards (mobile only) */}
-										{!isLast && (
-											<AnimatedConnectingLine
-												axis="y"
-												delay={0.2 + index * 0.1}
-												className="md:hidden absolute left-1/2 -bottom-8 w-[2px] h-8 origin-top -translate-x-1/2"
-												style={{
-													background:
-														"linear-gradient(to bottom, rgba(20,184,166,0.5), rgba(59,130,246,0.5))",
-												}}
-											/>
-										)}
-									</FadeIn>
-								);
-							})}
-						</div>
-					</div>
-				</div>
-			</section>
-
-			{/* Why firms choose us */}
-			<section className="px-6 py-20">
-				<div className="max-w-7xl mx-auto">
-					<FadeIn>
-						<div className="text-center mb-14">
-							<h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-4">
-								Why law firms choose PraxisFlow
-							</h2>
-						</div>
-					</FadeIn>
-
-					<div className="grid md:grid-cols-3 gap-6">
-						{differentiators.map((item, index) => {
-							const Icon = item.icon;
-							return (
-								<FadeIn key={item.title} delay={index * 0.1}>
-									<div className="group relative bg-card border border-border p-8 rounded-2xl h-full flex flex-col overflow-hidden hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-300">
-										<div className="absolute top-0 right-0 p-6 opacity-[0.04] group-hover:opacity-[0.09] transition-opacity">
-											<Icon className="w-24 h-24 text-accent" />
-										</div>
-										<div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 text-accent">
-											<Icon className="w-6 h-6" />
-										</div>
-										<h3 className="text-lg font-medium text-foreground mb-2 relative z-10">
-											{item.title}
-										</h3>
-										<p className="text-muted-foreground leading-relaxed mb-5 flex-1 relative z-10">
-											{item.description}
-										</p>
-										<Link
-											href={item.href}
-											className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:gap-3 transition-all relative z-10"
-										>
-											{item.linkLabel}
-											<ArrowRight className="w-4 h-4" />
-										</Link>
-									</div>
-								</FadeIn>
-							);
-						})}
-					</div>
-				</div>
-			</section>
-
-			{/* FAQ */}
-			<section className="px-6 py-20 bg-secondary/40">
-				<div className="max-w-3xl mx-auto">
-					<FadeIn>
-						<h2 className="text-3xl md:text-4xl font-medium text-foreground tracking-tight mb-10 text-center">
-							Law firm automation FAQ
-						</h2>
-					</FadeIn>
-
-					<LegalAutomationFAQ faqs={faqs} />
-				</div>
-			</section>
-
-			{/* Final CTA */}
-			<section className="px-6 py-24">
-				<div className="max-w-5xl mx-auto bg-primary rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
-					<DotPattern
-						width={20}
-						height={20}
-						cx={1}
-						cy={1}
-						cr={1}
-						className={cn(
-							"[mask-image:radial-gradient(520px_circle_at_center,white,transparent)]",
-							"text-primary-foreground/15",
-						)}
-					/>
-					<div className="absolute top-0 right-0 w-64 h-64 bg-accent rounded-full blur-[110px] opacity-20 translate-x-1/3 -translate-y-1/3"></div>
-
-					<div className="relative z-10">
-						<FadeIn>
-							<h2 className="text-3xl md:text-5xl font-medium text-primary-foreground tracking-tight mb-6">
-								Ready to automate your firm's busywork?
-							</h2>
-							<p className="text-primary-foreground/70 text-lg max-w-2xl mx-auto mb-10">
-								Book a free discovery call and we'll map exactly
-								where your firm can reclaim hours with law firm
-								automation.
-							</p>
-						</FadeIn>
-						<FadeIn delay={0.15}>
-							<Link
-								href={CALENDAR_URL}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-block"
-							>
-								<ShimmerButton
-									className="px-8 py-3.5 rounded-2xl font-medium"
-									background="hsl(var(--background))"
-									shimmerColor="#0d9488"
-									shimmerDuration="2s"
-									shimmerSize="0.30em"
+					<ul className="grid self-start border-l border-t border-rule [&>*]:border-b [&>*]:border-r [&>*]:border-rule sm:grid-cols-2 lg:col-span-7">
+						{roles.map((r) => (
+							<li key={r.slug}>
+								<Link
+									href={r.href ?? `/ai-agents-for-law-firms#${r.slug}`}
+									className="group relative flex h-full items-center gap-4 bg-white px-5 py-4 transition-colors duration-200 hover:bg-slate-50"
 								>
-									<span className="flex items-center justify-center gap-2 text-foreground">
-										Book a Free Discovery Call
-										<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-									</span>
-								</ShimmerButton>
-							</Link>
-							<p className="mt-6 text-xs text-primary-foreground/50">
-								Free consultation. No commitment required.
-							</p>
-						</FadeIn>
+									<Monogram initials={r.initials} className="h-10 w-10 text-[14px]" />
+									<span className="font-serif text-[18px] text-ink">{r.title}</span>
+									<span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 origin-left will-change-transform scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+
+			<section className="border-t border-rule bg-desk py-24 sm:py-28">
+				<div className={wrap}>
+					<ArticleHeading>How law firm automation works with PraxisFlow</ArticleHeading>
+					<p className="mt-5 max-w-[56ch] text-[18px] leading-relaxed text-muted-foreground">
+						Three steps from your first call to automations running quietly in the background.
+					</p>
+					<HiringSteps steps={steps} />
+				</div>
+			</section>
+
+			<section className="bg-ink py-24 text-white sm:py-28">
+				<div className={wrap}>
+					<h2 className="font-serif text-[clamp(2.1rem,4vw,3.25rem)] leading-[1.08] tracking-[-0.015em]">Why law firms choose PraxisFlow</h2>
+					<ul className="mt-14 grid gap-12 md:grid-cols-3">
+						{differentiators.map((d, i) => (
+							<Reveal as="li" key={d.title} delay={i * 0.06} className="border-t border-white/25 pt-6">
+								<h3 className="font-serif text-[24px]">{d.title}</h3>
+								<p className="mt-3 text-[16px] leading-relaxed text-slate-300">{d.description}</p>
+								<Link href={d.href} className="group mt-5 inline-flex items-center gap-1.5 text-[15px] font-medium underline decoration-white/30 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-accent">
+									{d.linkLabel}
+									<span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
+								</Link>
+							</Reveal>
+						))}
+					</ul>
+				</div>
+			</section>
+
+			<section className="bg-white py-24 sm:py-28">
+				<div className={`${wrap} grid gap-12 lg:grid-cols-12`}>
+					<div className="lg:col-span-4">
+						<ArticleHeading>Law firm automation FAQ</ArticleHeading>
+					</div>
+					<div className="lg:col-span-8">
+						<FaqList faqs={faqs} />
 					</div>
 				</div>
 			</section>
+
+			<RelatedReading items={[posts.fiveAutomations, posts.hiddenCost, posts.immigrationOperations]} />
+
+			<CloseCta
+				title="Ready to automate your firm's busywork?"
+				body="Book a free discovery call and we'll map exactly where your firm can reclaim hours with law firm automation."
+			/>
 		</div>
 	);
 }
