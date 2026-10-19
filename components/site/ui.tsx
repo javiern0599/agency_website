@@ -25,8 +25,11 @@ export function ArrowButton({ children, href, variant = "solid", className }: Bu
 		plainLight: "text-white",
 	}[variant];
 	const plain = variant === "plain" || variant === "plainLight";
+	// In-page anchors use a plain <a>: Next's <Link> ignores a second click on the same #hash,
+	// while the browser re-scrolls to the section every time.
+	const Comp = href.startsWith("#") ? "a" : Link;
 	return (
-		<Link
+		<Comp
 			href={href}
 			{...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
 			className={cn(
@@ -43,7 +46,7 @@ export function ArrowButton({ children, href, variant = "solid", className }: Bu
 				strokeWidth={1.75}
 			/>
 			{plain && <GrowLine />}
-		</Link>
+		</Comp>
 	);
 }
 

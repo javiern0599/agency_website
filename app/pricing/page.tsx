@@ -26,9 +26,9 @@ const tracks: Track[] = [
 		lede: "A role built into your tools, tested with your staff, then maintained and improved for you every month.",
 		lines: [
 			{ label: "Setup", value: pricing.role.setup, note: "once, per role" },
-			{ label: "Monthly", value: pricing.role.monthly, note: "per role" },
+			{ label: "Monthly", value: pricing.role.monthly, note: "a month per role, optional" },
 		],
-		extra: `Each additional role: from ${pricing.extraRole.setup} setup and ${pricing.extraRole.monthly} a month, since it shares your private environment.`,
+		extra: `Each additional role: from ${pricing.extraRole.setup} setup and ${pricing.extraRole.monthly} a month.`,
 		groups: [
 			{
 				title: "Setup includes",
@@ -40,7 +40,7 @@ const tracks: Track[] = [
 				],
 			},
 			{
-				title: "Every month includes",
+				title: "Optional support includes",
 				items: [
 					"Maintaining your firm's own server: security, updates, backups",
 					"Keeping AI costs low on your firm's own AI account",
@@ -94,7 +94,7 @@ const drivers = [
 const pricingFaqs: Faq[] = [
 	{
 		question: "What does the monthly fee for an AI employee cover?",
-		answer: "Maintaining your firm's own server (security, updates and backups), monitoring, ongoing tuning and changes when your tools change. It also covers support when you need a change to the role's rules or wording. Two things are billed separately: the server itself, at the hosting provider's price, and AI usage, which your firm pays directly to the AI provider.",
+		answer: "Maintaining your firm's own server (security, updates and backups), monitoring, ongoing tuning and changes when your tools change. It also covers support when you need a change to the role's rules or wording. Two things are billed separately: the server itself, at the hosting provider's price, and AI usage, which your firm pays directly to the AI provider. If we build the role in an automation platform your firm already uses, such as n8n Cloud, there is no server to maintain and monthly support is optional.",
 	},
 	{
 		question: "Who pays for the AI itself?",
@@ -205,7 +205,13 @@ export default function PricingPage() {
 							<TrackSheet key={t.title} t={t} i={i} />
 						))}
 					</ol>
-					<p className="mt-6 text-[14px] text-muted-foreground">
+					<p className="mt-8 max-w-[75ch] border-l-2 border-accent pl-4 text-[15px] leading-relaxed text-ink">
+						<span className="font-medium">When the monthly fee applies.</span>{" "}
+						For both tracks, monthly support is optional when we
+						build in an automation platform your firm already uses, such as n8n Cloud. It is required when your roles or
+						automations run on your firm&apos;s own server, which we set up and maintain for you.
+					</p>
+					<p className="mt-4 text-[14px] text-muted-foreground">
 						Prices in US dollars. Billed separately: your firm's server, at the price of the provider it runs on, and AI usage, paid directly to the AI provider through your firm's own account. Annual commitments get {pricing.annualDiscount} off the monthly fee.
 					</p>
 				</div>

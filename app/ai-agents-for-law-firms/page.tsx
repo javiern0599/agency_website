@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { RelatedReading, posts } from "@/components/site/RelatedReading";
-import Link from "next/link";
 import { EngagementSheet } from "@/components/site/EngagementSheet";
 import { HiringSteps } from "@/components/site/HiringSteps";
 import { Limits } from "@/components/site/Limits";
@@ -77,7 +76,7 @@ export default function AiAgentsPage() {
 			>
 				<ArrowButton href={CALENDAR_URL}>{hero.primary}</ArrowButton>
 				<ArrowButton href="#roles" variant="plain">
-					Read the schedules
+					See all roles
 				</ArrowButton>
 			</PageHero>
 
@@ -99,7 +98,7 @@ export default function AiAgentsPage() {
 							<ol className="mt-6 border-t border-rule">
 								{roles.map((r, i) => (
 									<li key={r.slug} className="border-b border-rule">
-										<Link
+										<a
 											href={`#${r.slug}`}
 											className="group grid grid-cols-[2.25rem_1fr] items-baseline py-3 text-[15px] text-muted-foreground transition-colors duration-200 hover:text-ink"
 										>
@@ -107,14 +106,14 @@ export default function AiAgentsPage() {
 											<span className="relative">
 												{r.title}
 											</span>
-										</Link>
+										</a>
 									</li>
 								))}
 								<li className="border-b border-rule">
-									<Link href="#more-roles" className="grid grid-cols-[2.25rem_1fr] py-3 text-[15px] text-muted-foreground transition-colors duration-200 hover:text-ink">
+									<a href="#more-roles" className="grid grid-cols-[2.25rem_1fr] py-3 text-[15px] text-muted-foreground transition-colors duration-200 hover:text-ink">
 										<span />
 										More roles on request
-									</Link>
+									</a>
 								</li>
 							</ol>
 						</div>

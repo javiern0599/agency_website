@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { Check } from "lucide-react";
+import { ArrowDown, Check } from "lucide-react";
 import { booking, conversation, crmRecord, onboardingRun, ownerSummary, summaryEmail } from "@/lib/site-content";
 import { useScrollSteps } from "./use-scroll-steps";
 import { ArticleHeading } from "./ui";
@@ -156,6 +156,12 @@ export function Transcript({
 					<ArticleHeading n={n}>{title}</ArticleHeading>
 					<p className="mt-3 text-[15px] text-muted-foreground">
 						Exhibit A. Illustrative WhatsApp conversation. Names and details are fictional.
+						{pinned && step < STEPS - 1 && (
+							<span className="mt-1 flex items-center gap-1.5 font-medium text-accent-ink">
+								Scroll down to see how it plays out
+								<ArrowDown aria-hidden className="h-3.5 w-3.5 motion-safe:animate-bounce" strokeWidth={2} />
+							</span>
+						)}
 					</p>
 					<div className="mt-6 flex flex-1 flex-col overflow-hidden bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)] lg:min-h-0">
 						<div className="relative z-10 flex shrink-0 items-center justify-between gap-4 border-b border-rule bg-white px-5 py-3 text-[12px] text-muted-foreground">

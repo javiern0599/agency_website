@@ -218,7 +218,7 @@ export const conversation: Msg[] = [
 	},
 	{
 		from: "lead",
-		text: "Daniel Okafor. The letter says November 14, here in Boston. Do you think she'll be approved?",
+		text: "I'm Daniel. The letter says November 14, here in Boston. Do you think she'll be approved?",
 	},
 	{
 		from: "agent",
@@ -233,14 +233,14 @@ export const conversation: Msg[] = [
 ];
 
 export const booking = {
-	title: "Consultation: Okafor",
+	title: "Consultation with Daniel",
 	when: "Tuesday, 10:00 to 10:30 AM",
 	where: "Video call",
 	note: "Green card interview on Nov 14. Booked by the Intake Coordinator on WhatsApp.",
 };
 
 export const crmRecord: [string, string][] = [
-	["Name", "Daniel Okafor"],
+	["Name", "Daniel"],
 	["Channel", "WhatsApp"],
 	["Matter type", "Family-based adjustment of status"],
 	["Key date", "USCIS interview, Nov 14, Boston"],
@@ -251,7 +251,7 @@ export const crmRecord: [string, string][] = [
 export const summaryEmail = {
 	subject: "Intake summary for Saturday",
 	lines: [
-		"Okafor: green card interview Nov 14. Consult booked Tuesday 10:00 AM.",
+		"Daniel: green card interview Nov 14. Consult booked Tuesday 10:00 AM.",
 		"One conversation handed to staff: a question about fees.",
 	],
 };
@@ -274,7 +274,7 @@ export const onboardingRun = {
 export const ownerSummary = {
 	subject: "Daily summary for Thursday",
 	lines: [
-		"Okafor: engagement signed this morning after Tuesday's consultation. Client set up.",
+		"Daniel: engagement signed this morning after Tuesday's consultation. Client set up.",
 		"One inquiry handed to staff: a question about fees.",
 	],
 };
