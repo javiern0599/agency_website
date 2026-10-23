@@ -94,7 +94,7 @@ Stored in `.env.local` (not committed). Known keys:
 - **Single post** (`app/blog/[slug]/page.tsx`): `force-dynamic`. `params` is a `Promise`
   (Next 16) and must be awaited. `generateMetadata` builds title/description/canonical/OG/
   Twitter with tiered fallbacks (SEO component → post field → site default; metaImage →
-  coverImage → `/og-image.webp`). Body rendered with `<BlocksRenderer content={post.content} />`
+  coverImage → `/og-ai-employees.jpg`). Body rendered with `<BlocksRenderer content={post.content} />`
   inside a Tailwind `prose` wrapper. Missing post → `notFound()`. Comments rendered below.
 - **Pagination / filtering / search** (list page): all driven by URL search params
   (`?page=`, `?category=`, `?q=`) read by the `app/blog/page.tsx` server component. State

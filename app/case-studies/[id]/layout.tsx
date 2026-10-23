@@ -36,7 +36,7 @@ export async function generateMetadata({
 			type: "article",
 			images: [
 				{
-					url: "/og-image.webp",
+					url: "/og-ai-employees.jpg",
 					width: 1200,
 					height: 630,
 					alt: caseStudy.title,
@@ -47,7 +47,7 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title: `${caseStudy.title} | PraxisFlow`,
 			description,
-			images: ["/og-image.webp"],
+			images: ["/og-ai-employees.jpg"],
 		},
 	};
 }

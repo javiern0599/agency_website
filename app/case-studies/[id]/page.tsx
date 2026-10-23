@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			description,
 			url: `https://www.praxisflow.com/case-studies/${c.id}`,
 			type: "article",
-			images: [{ url: "/og-image.webp", width: 1200, height: 630, alt: c.title }],
+			images: [{ url: "/og-ai-employees.jpg", width: 1200, height: 630, alt: c.title }],
 		},
 	};
 }

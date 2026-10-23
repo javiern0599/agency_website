@@ -42,7 +42,7 @@ export async function generateMetadata({
 		const imageUrl =
 			post.seo?.metaImage?.url ||
 			post.coverImage?.url ||
-			"https://www.praxisflow.com/og-image.webp";
+			"https://www.praxisflow.com/og-ai-employees.jpg";
 
 		return {
 			title: title, // This cleanly inherits the "%s | PraxisFlow" template formatting from layout.tsx

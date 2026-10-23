@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 		type: "website",
 		images: [
 			{
-				url: "/og-image.webp",
+				url: "/og-ai-employees.jpg",
 				width: 1200,
 				height: 630,
 				alt: "PraxisFlow Pricing",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 		title: "Pricing | PraxisFlow",
 		description:
 			"AI employees from $2,500 setup and $500 a month per role. Custom automation from $2,000. Fixed quotes, no long-term contract.",
-		images: ["/og-image.webp"],
+		images: ["/og-ai-employees.jpg"],
 	},
 };
 

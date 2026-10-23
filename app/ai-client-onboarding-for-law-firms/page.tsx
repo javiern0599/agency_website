@@ -33,9 +33,9 @@ export const metadata: Metadata = {
 		description: DESCRIPTION,
 		url: "https://www.praxisflow.com/ai-client-onboarding-for-law-firms",
 		type: "website",
-		images: [{ url: "/og-image.webp", width: 1200, height: 630, alt: `${TITLE} | PraxisFlow` }],
+		images: [{ url: "/og-ai-employees.jpg", width: 1200, height: 630, alt: `${TITLE} | PraxisFlow` }],
 	},
-	twitter: { card: "summary_large_image", title: `${TITLE} | PraxisFlow`, description: DESCRIPTION, images: ["/og-image.webp"] },
+	twitter: { card: "summary_large_image", title: `${TITLE} | PraxisFlow`, description: DESCRIPTION, images: ["/og-ai-employees.jpg"] },
 };
 
 const onboarding = roles.find((r) => r.slug === "onboarding-specialist")!;
