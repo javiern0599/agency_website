@@ -137,8 +137,9 @@ export function Seal({ className, animate = true }: { className?: string; animat
 			<circle cx="100" cy="100" r="96" fill="#0c665b" />
 			<circle cx="100" cy="100" r="88" fill="none" stroke="white" strokeOpacity="0.5" strokeWidth="0.75" />
 			<circle cx="100" cy="100" r="60" fill="none" stroke="white" strokeOpacity="0.5" strokeWidth="0.75" />
-			<text fill="white" fontSize="11.5" letterSpacing="2.4" fontFamily="var(--font-public)" fontWeight={500}>
-				<textPath href={`#seal-${id}`}>PRAXISFLOW · ENGAGEMENT OF STAFF · PRIVATE ENVIRONMENT · </textPath>
+			<text fill="white" fontSize="11" fontFamily="var(--font-public)" fontWeight={500}>
+				{/* textLength = the path's circumference (2π × 74), so the ring closes exactly instead of overlapping. */}
+				<textPath href={`#seal-${id}`} textLength={464.96} lengthAdjust="spacing">PRAXISFLOW · ENGAGEMENT OF STAFF · PRIVATE ENVIRONMENT ·&nbsp;</textPath>
 			</text>
 			<text x="100" y="114" textAnchor="middle" fill="white" fontSize="40" fontFamily="var(--font-caslon)">
 				§
