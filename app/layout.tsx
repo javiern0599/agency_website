@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://praxisflow.com",
+		url: "https://www.praxisflow.com",
 		title: "AI Employees for Law Firms | PraxisFlow",
 		description: SITE_DESCRIPTION,
 		siteName: "PraxisFlow",
