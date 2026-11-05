@@ -1,14 +1,25 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import {
+	clientIp,
+	cleanText,
+	escapeHtml,
+	isSafeShortField,
+	isValidEmail,
+	n8nHeaders,
+	rateLimited,
+	verifyTurnstile,
+} from "@/lib/form-security";
 
 export async function POST(req: Request) {
 	try {
-		const { name, email, firm, message, fax } = await req.json();
+		const body = await req.json().catch(() => null);
+		if (!body || typeof body !== "object") {
+			return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+		}
 
 		// Honeypot check
-		if (fax) {
+		if (body.fax) {
 			console.warn("Honeypot activated. Bot detected.");
 			return NextResponse.json({
 				success: true,
@@ -16,11 +27,43 @@ export async function POST(req: Request) {
 			});
 		}
 
-		// Basic Validation
+		const ip = clientIp(req);
+		if (rateLimited(`contact:${ip}`, 5, 10 * 60 * 1000)) {
+			return NextResponse.json(
+				{ error: "Too many requests. Please try again in a few minutes." },
+				{ status: 429 },
+			);
+		}
+
+		const name = cleanText(body.name, 100);
+		const email = cleanText(body.email, 254).toLowerCase();
+		const firm = cleanText(body.firm, 150);
+		const message = cleanText(body.message, 5000, { multiline: true });
+
+		// Validation
 		if (!name || !email || !firm || !message) {
 			return NextResponse.json(
 				{ error: "Missing required fields" },
 				{ status: 400 },
+			);
+		}
+		if (!isValidEmail(email)) {
+			return NextResponse.json(
+				{ error: "Please enter a valid work email" },
+				{ status: 400 },
+			);
+		}
+		if (!isSafeShortField(name) || !isSafeShortField(firm)) {
+			return NextResponse.json(
+				{ error: "Name and firm can't contain links or special characters" },
+				{ status: 400 },
+			);
+		}
+
+		if (!(await verifyTurnstile(body.turnstileToken, ip))) {
+			return NextResponse.json(
+				{ error: "Verification failed. Please refresh the page and try again." },
+				{ status: 403 },
 			);
 		}
 
@@ -28,8 +71,6 @@ export async function POST(req: Request) {
 		// 1. PRIMARY ROUTE: Send to n8n Webhook
 		// ==========================================
 
-		// Ensure you add this variable to your .env file:
-		// N8N_WEBHOOK_URL="https://n8n.yourdomain.com/webhook/contact-form"
 		const n8nUrl = process.env.N8N_WEBHOOK_URL;
 		let n8nSuccess = false;
 
@@ -37,7 +78,7 @@ export async function POST(req: Request) {
 			try {
 				const n8nResponse = await fetch(n8nUrl, {
 					method: "POST",
-					headers: { "Content-Type": "application/json" },
+					headers: n8nHeaders(),
 					body: JSON.stringify({
 						name,
 						email,
@@ -70,10 +111,6 @@ export async function POST(req: Request) {
 		// 2. FALLBACK/NOTIFICATION: Send via Resend
 		// ==========================================
 
-		// If n8n failed, we MUST send an email so the lead isn't lost.
-		// Even if n8n succeeded, you might still want an immediate email notification.
-		// You can remove this block if your n8n workflow handles all email notifications.
-
 		if (!process.env.RESEND_API_KEY) {
 			if (n8nSuccess) {
 				return NextResponse.json({
@@ -87,9 +124,11 @@ export async function POST(req: Request) {
 			);
 		}
 
-		const { data, error } = await resend.emails.send({
+		const resend = new Resend(process.env.RESEND_API_KEY);
+		const { error } = await resend.emails.send({
 			from: "PraxisFlow Leads <onboarding@mail.praxisflow.com>",
 			to: ["contact@praxisflow.com"],
+			// cleanText already removed line breaks from firm, so it can't add headers.
 			subject: n8nSuccess
 				? `[n8n Logged] New Lead: ${firm}`
 				: `[URGENT - n8n Failed] New Lead: ${firm}`,
@@ -98,11 +137,11 @@ export async function POST(req: Request) {
                 <h2>New Contact Request</h2>
                 <p><strong>Status:</strong> ${n8nSuccess ? "✅ Logged in Airtable via n8n" : "❌ n8n Failed - Manual Entry Required"}</p>
                 <hr />
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Firm:</strong> ${firm}</p>
+                <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+                <p><strong>Firm:</strong> ${escapeHtml(firm)}</p>
                 <p><strong>Message:</strong></p>
-                <p>${message.replace(/\n/g, "<br>")}</p>
+                <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
             `,
 		});
 
@@ -115,11 +154,7 @@ export async function POST(req: Request) {
 			);
 		}
 
-		return NextResponse.json({
-			success: true,
-			n8nSuccess,
-			resendData: data,
-		});
+		return NextResponse.json({ success: true });
 	} catch (error) {
 		console.error("API Route Error:", error);
 		return NextResponse.json(

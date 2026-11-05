@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sendGAEvent } from "@next/third-parties/google";
 import * as pixel from "@/lib/fpixel";
+import { Turnstile, turnstileEnabled, type TurnstileHandle } from "@/components/ui/turnstile";
+
+// Same rule as the server: no markup, template syntax or links in name and firm.
+const UNSAFE_SHORT_FIELD = /[<>{}]|:\/\/|\bwww\.|\[|\]/i;
 
 export function ContactForm() {
 	const [status, setStatus] = useState<
@@ -20,6 +24,8 @@ export function ContactForm() {
 	const [errors, setErrors] = useState<Record<string, string>>({});
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [errorMessage, setErrorMessage] = useState("");
+	const [turnstileToken, setTurnstileToken] = useState("");
+	const turnstileRef = useRef<TurnstileHandle>(null);
 
 	const validateField = (name: string, value: string) => {
 		let error = "";
@@ -27,12 +33,16 @@ export function ContactForm() {
 			if (!value.trim()) error = "Name is required";
 			else if (value.trim().length < 2)
 				error = "Name must be at least 2 characters";
+			else if (UNSAFE_SHORT_FIELD.test(value))
+				error = "Please use letters only, no links or symbols";
 		} else if (name === "email") {
 			if (!value.trim()) error = "Email is required";
 			else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
 				error = "Please enter a valid work email";
 		} else if (name === "firm") {
 			if (!value.trim()) error = "Firm name is required";
+			else if (UNSAFE_SHORT_FIELD.test(value))
+				error = "Please use the firm's name only, no links or symbols";
 		} else if (name === "message") {
 			if (!value.trim()) error = "Please tell us a bit about your needs";
 			else if (value.trim().length < 10) error = "Message is too short";
@@ -90,6 +100,12 @@ export function ContactForm() {
 			return;
 		}
 
+		if (turnstileEnabled && !turnstileToken) {
+			setErrorMessage("Please wait a moment for the security check, then try again.");
+			setStatus("error");
+			return;
+		}
+
 		setStatus("loading");
 		setErrorMessage("");
 
@@ -103,7 +119,7 @@ export function ContactForm() {
 			const response = await fetch("/api/contact", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(formData),
+				body: JSON.stringify({ ...formData, turnstileToken }),
 			});
 
 			const data = await response.json();
@@ -143,6 +159,9 @@ export function ContactForm() {
 			});
 			setErrorMessage(error.message);
 			setStatus("error");
+		} finally {
+			// Turnstile tokens are single use.
+			turnstileRef.current?.reset();
 		}
 	};
 
@@ -300,6 +319,8 @@ export function ContactForm() {
 					autoComplete="off"
 				/>
 			</div>
+
+			<Turnstile ref={turnstileRef} onToken={setTurnstileToken} />
 
 			{status === "error" && (
 				<p className="text-sm font-medium text-red-700">

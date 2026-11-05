@@ -1,7 +1,8 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Turnstile, turnstileEnabled, type TurnstileHandle } from "@/components/ui/turnstile";
 
 export function NewsletterForm() {
 	const [email, setEmail] = useState("");
@@ -10,6 +11,8 @@ export function NewsletterForm() {
 		"idle" | "loading" | "success" | "error"
 	>("idle");
 	const [message, setMessage] = useState("");
+	const [turnstileToken, setTurnstileToken] = useState("");
+	const turnstileRef = useRef<TurnstileHandle>(null);
 
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
@@ -20,13 +23,19 @@ export function NewsletterForm() {
 			return;
 		}
 
+		if (turnstileEnabled && !turnstileToken) {
+			setStatus("error");
+			setMessage("Please wait a moment for the security check, then try again.");
+			return;
+		}
+
 		setStatus("loading");
 
 		try {
 			const res = await fetch("/api/newsletter", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, fax }),
+				body: JSON.stringify({ email, fax, turnstileToken }),
 			});
 
 			const data = await res.json();
@@ -47,7 +56,10 @@ export function NewsletterForm() {
 		} catch (err) {
 			console.error(err);
 			setStatus("error");
-			setMessage("Network error — please try again later.");
+			setMessage("Network error. Please try again later.");
+		} finally {
+			// Turnstile tokens are single use.
+			turnstileRef.current?.reset();
 		}
 	}
 
@@ -102,6 +114,8 @@ export function NewsletterForm() {
 					)}
 				</button>
 			</form>
+
+			<Turnstile ref={turnstileRef} onToken={setTurnstileToken} className="mt-2" />
 
 			{message && (
 				<p
