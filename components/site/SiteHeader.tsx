@@ -64,6 +64,24 @@ export default function SiteHeader() {
 				</nav>
 
 				<div className="flex items-center gap-2">
+					{/* Secondary to the button: for visitors who'd rather write than book a call. */}
+					<Link
+						href="/contact"
+						aria-current={isActive("/contact") ? "page" : undefined}
+						className={cn(
+							"group relative mr-4 hidden py-2 text-[14px] transition-colors duration-200 sm:block",
+							isActive("/contact") ? "text-ink" : "text-muted-foreground hover:text-ink",
+						)}
+					>
+						Contact
+						<span
+							aria-hidden
+							className={cn(
+								"absolute inset-x-0 bottom-0 h-px origin-left will-change-transform bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100",
+								isActive("/contact") ? "scale-x-100" : "scale-x-0",
+							)}
+						/>
+					</Link>
 					<div className="hidden sm:block">
 						<ArrowButton href={CALENDAR_URL} className="py-2.5 text-[14px]">
 							{hero.short}
@@ -144,6 +162,14 @@ export default function SiteHeader() {
 								<ArrowButton href={CALENDAR_URL} className="w-full justify-between">
 									{hero.primary}
 								</ArrowButton>
+								<Link
+									href="/contact"
+									onClick={() => setOpen(false)}
+									className="mt-4 inline-flex items-center gap-1.5 text-[15px] text-muted-foreground underline decoration-rule underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-accent"
+								>
+									Or send us a message
+									<span aria-hidden>→</span>
+								</Link>
 							</div>
 						</nav>
 					</motion.div>
