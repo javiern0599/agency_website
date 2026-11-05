@@ -5,7 +5,8 @@
 
 export const CALENDAR_URL = "https://calendar.app.google/AtTiu5d3kd2EwumQ8";
 
-// Six links: what we offer, proof, price, trust, who we are. Blog lives in the footer
+// Six links: what we offer, proof, price, trust, who we are. Contact sits next to the
+// header button (SiteHeader) instead of in this list. Blog lives in the footer
 // (its readers mostly arrive from search, not from the menu).
 export const nav = [
 	{ label: "AI Employees", href: "/ai-agents-for-law-firms" },
