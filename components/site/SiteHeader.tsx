@@ -69,7 +69,7 @@ export default function SiteHeader() {
 						href="/contact"
 						aria-current={isActive("/contact") ? "page" : undefined}
 						className={cn(
-							"group relative mr-4 hidden py-2 text-[14px] transition-colors duration-200 sm:block",
+							"group relative mr-4 hidden py-2 text-[14px] transition-colors duration-200 lg:block",
 							isActive("/contact") ? "text-ink" : "text-muted-foreground hover:text-ink",
 						)}
 					>
@@ -82,7 +82,8 @@ export default function SiteHeader() {
 							)}
 						/>
 					</Link>
-					<div className="hidden sm:block">
+					{/* Below lg, everything lives in the menu: one header state per size, never a mix. */}
+					<div className="hidden lg:block">
 						<ArrowButton href={CALENDAR_URL} className="py-2.5 text-[14px]">
 							{hero.short}
 						</ArrowButton>
